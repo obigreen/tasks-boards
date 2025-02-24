@@ -11,14 +11,12 @@ interface BoardsProps {
     setBoardName: (name: string) => void;
 }
 
-// Превращаем в компонент, принимающий setBoardName из App
-export const Boards: React.FC<BoardsProps> = ({ setBoardName }) => {
+export const Boards = ({ setBoardName }: BoardsProps) => {
     const boards: Board[] = [
         { id: 1, name: 'Board one' },
         { id: 2, name: 'Board two' },
     ];
 
-    // При монтировании (заходе на "/") выставляем заголовок "Boards"
     useEffect(() => {
         setBoardName('Boards');
     }, [setBoardName]);
@@ -27,7 +25,7 @@ export const Boards: React.FC<BoardsProps> = ({ setBoardName }) => {
         <BoardsContainer>
             <BoardsDiv>
                 {boards.map((board) => (
-                    <BoardCard key={board.id} to={`/board/${board.id}`}>
+                    <BoardCard key={board.id} to={`/boards/${board.id}`}>
                         {board.name}
                     </BoardCard>
                 ))}

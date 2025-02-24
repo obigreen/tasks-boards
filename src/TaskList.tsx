@@ -16,7 +16,7 @@ interface TaskListProps {
     list: List;
 }
 
-export const TaskList: React.FC<TaskListProps> = ({ list }) => {
+export const TaskList = ({ list }:TaskListProps) => {
     return (
         <TaskListContainer>
             <Title>{list.title}</Title>

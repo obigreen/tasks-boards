@@ -21,17 +21,10 @@ type BoardData = {
 };
 
 interface BoardViewProps {
-    isSidebarOpen: boolean;
-    toggleSidebar: () => void;
-    // Добавили проп, чтобы передавать имя доски в App
     setBoardName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const BoardView: React.FC<BoardViewProps> = ({
-                                                        isSidebarOpen,
-                                                        toggleSidebar,
-                                                        setBoardName,
-                                                    }) => {
+export const BoardView = ({setBoardName}:BoardViewProps) => {
     const { id } = useParams<{ id: string }>();
     const [board, setBoard] = useState<BoardData | null>(null);
 
@@ -42,7 +35,7 @@ export const BoardView: React.FC<BoardViewProps> = ({
             lists: [
                 {
                     id: 1,
-                    title: 'Нужно сделать',
+                    title: 'need',
                     tasks: [
                         { id: 11, name: 'Задача 1' },
                         { id: 12, name: 'Задача 2' },
@@ -50,7 +43,32 @@ export const BoardView: React.FC<BoardViewProps> = ({
                 },
                 {
                     id: 2,
-                    title: 'В процессе',
+                    title: 'ready',
+                    tasks: [{ id: 21, name: 'Задача 1' }],
+                },
+                {
+                    id: 3,
+                    title: 'test',
+                    tasks: [{ id: 21, name: 'Задача 1' }],
+                },
+                {
+                    id: 4,
+                    title: 'test',
+                    tasks: [{ id: 21, name: 'Задача 1' }],
+                },
+                {
+                    id: 5,
+                    title: 'test',
+                    tasks: [{ id: 21, name: 'Задача 1' }],
+                },
+                {
+                    id: 6,
+                    title: 'test',
+                    tasks: [{ id: 21, name: 'Задача 1' }],
+                },
+                {
+                    id: 7,
+                    title: 'test',
                     tasks: [{ id: 21, name: 'Задача 1' }],
                 },
             ],
@@ -88,12 +106,10 @@ export const BoardView: React.FC<BoardViewProps> = ({
         }
     }, [id]);
 
-    // После того как board обновится — отправляем его имя в App
     useEffect(() => {
         if (board) {
             setBoardName(board.name);
         } else {
-            // Если доски нет, сбрасываем имя, чтобы не оставалось старое
             setBoardName('');
         }
     }, [board, setBoardName]);
@@ -101,7 +117,6 @@ export const BoardView: React.FC<BoardViewProps> = ({
     return (
         <BoardContainer>
             <BoardViewWrapper>
-                {/* Убрали <h2> с названием доски, теперь всё уезжает в App */}
                 {board && (
                     <Lists>
                         {board.lists.map((list) => (
@@ -113,10 +128,6 @@ export const BoardView: React.FC<BoardViewProps> = ({
         </BoardContainer>
     );
 }
-
-// Стили не менялись, поэтому не повторяем их заново.
-
-
 
 const BoardContainer = styled.div`
   display: flex;
