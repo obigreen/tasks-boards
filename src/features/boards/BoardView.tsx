@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { TaskList } from './TaskList';
+import { TaskList } from '../tasks/TaskList';
 
 type Task = {
     id: number;
@@ -132,24 +132,23 @@ export const BoardView = ({setBoardName}:BoardViewProps) => {
 const BoardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
   overflow: hidden;
 `;
 
 
 const BoardViewWrapper = styled.div`
-  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+    height: 100vh;
 `;
 
 const Lists = styled.div`
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  overflow-x: auto;
-  height: 100%;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto;
+    height: 100%;
 `;
 
 

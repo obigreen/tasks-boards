@@ -38,7 +38,6 @@ export const Boards = ({ setBoardName }: BoardsProps) => {
 
 
 const BoardsContainer = styled.div`
-  height: 100%;
   color: white;
 `;
 

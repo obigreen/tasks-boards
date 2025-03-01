@@ -1,14 +1,10 @@
 import React, {useState} from 'react';
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import styled from 'styled-components';
-import myLogo from './assets/logo.svg';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faLemon, faSquarePlus, faUser} from '@fortawesome/free-regular-svg-icons';
-import {faScrewdriverWrench} from '@fortawesome/free-solid-svg-icons';
 import './App.css';
-import {BoardView} from './BoardView';
-import {Boards} from './Boards';
-import {Members} from "./Members";
+import {Sidebar} from "./features/sidebar/Sidebar";
+import {Header} from "./layout/header/Header";
+import {AppRoutes} from "./routes/AppRoutes";
 
 
 function App() {
@@ -22,76 +18,11 @@ function App() {
     return (
         <Router>
             <AppGrid className="App">
-                <Sidebar>
-                    <Logo>
-                        <Link to="/boards">
-                            <img src={myLogo} alt="My Logo"/>
-                        </Link>
-                    </Logo>
-
-                    <nav>
-                        <NavList>
-                            <li>
-                                <NavItem to="/boards">
-                                    <FontAwesomeIcon icon={faLemon}/>
-                                    <span>Boards</span>
-                                </NavItem>
-                            </li>
-                            <li>
-                                <NavItem to="/members">
-                                    <FontAwesomeIcon icon={faUser}/>
-                                    <span>Members</span>
-                                </NavItem>
-                            </li>
-                        </NavList>
-                    </nav>
-
-                    <SidebarBoards>
-                        <BoardsHeader>
-                            <BoardsTitle>Boards</BoardsTitle>
-                            <AddBoardButton>
-
-                            </AddBoardButton>
-                        </BoardsHeader>
-                        <BoardsList>
-                            <li>
-                                <BoardItem to="/boards/1">
-                                    <span>First board</span>
-                                </BoardItem>
-                            </li>
-                            <li>
-                                <BoardItem to="/boards/2">
-                                    <span>Second board</span>
-                                </BoardItem>
-                            </li>
-                        </BoardsList>
-                    </SidebarBoards>
-                </Sidebar>
+                <Sidebar/>
 
                 <MainContent>
-                    <Header>
-                        <HeaderTitle>{boardName}</HeaderTitle>
-                        <HeaderButtonsNav>
-                            <ShareButton>
-                                <FontAwesomeIcon icon={faSquarePlus} className="share-icon"/>
-                                <span>Поделиться</span>
-                            </ShareButton>
-                            <button className="add-board-btn" onClick={toggleSidebar}>
-                                <FontAwesomeIcon icon={faScrewdriverWrench}/>
-                            </button>
-                        </HeaderButtonsNav>
-                    </Header>
-
-                    <Routes>
-                        <Route path="/boards"
-                               element={<Boards setBoardName={setBoardName}/>}/>
-
-                        <Route path="/members"
-                               element={<Members setBoardTitle={setBoardName}/>}/>
-
-                        <Route path="/boards/:id"
-                               element={<BoardView setBoardName={setBoardName}/>}/>
-                    </Routes>
+                    <Header boardName={boardName} toggleSidebar={toggleSidebar} />
+                    <AppRoutes setBoardName={setBoardName} />
                 </MainContent>
 
 
@@ -127,154 +58,17 @@ function App() {
 export default App;
 
 
-
 const AppGrid = styled.main`
     display: grid;
     grid-template-columns: 260px 1fr;
-    height: 100%;
-    max-height: 100%;
-`;
-
-const Sidebar = styled.aside`
-    background: #212121;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
-    color: white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
     height: 100vh;
 `;
 
-const Logo = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: start;
-`;
-
-const NavList = styled.ul`
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-`;
-
-const NavItem = styled(Link)`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 5px 5px 0;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.3s;
-
-    span {
-        display: block;
-        margin-top: 2px;
-        font-size: 20px;
-    }
-
-    &:hover {
-        color: #ffba41;
-    }
-`;
-
-const SidebarBoards = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const BoardsHeader = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
-`;
-
-const BoardsTitle = styled.h2`
-    font-size: 23px;
-    font-weight: 400;
-    margin: 0;
-`;
-
-const AddBoardButton = styled.button`
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: white;
-    padding: 0;
-
-    &:hover {
-        color: #ffba41;
-    }
-`;
-
-const BoardsList = styled.ul`
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-`;
-
-const BoardItem = styled(Link)`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 5px 5px 0;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.3s;
-
-    &:hover {
-        color: #ffba41;
-    }
-`;
 
 const MainContent = styled.div`
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
-    height: 100%;
-`;
-
-const Header = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #212121;
-    padding: 20px;
-    color: white;
-    flex-shrink: 0;
-    width: 100%;
-`;
-
-const HeaderTitle = styled.h2`
-    font-size: 25px;
-    font-weight: 200;
-`;
-
-const HeaderButtonsNav = styled.nav`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-`;
-
-const ShareButton = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 8px;
-    background-color: white;
-    border: none;
-    border-radius: 5px;
-    transition: 0.3s;
-    cursor: pointer;
-
-    &:hover {
-        color: #ffba41;
-    }
 `;
 
 
