@@ -7,19 +7,18 @@ import styled from "styled-components";
 
 interface HeaderProps {
     boardName: string;
-    toggleSidebar: () => void;
 }
 
-export const Header = ({ boardName, toggleSidebar }: HeaderProps) => {
+export const Header = ({boardName}: HeaderProps) => {
     return (
         <HeaderWrapper>
             <HeaderTitle>{boardName}</HeaderTitle>
             <HeaderButtonsNav>
                 <ShareButton>
-                    <FontAwesomeIcon icon={faSquarePlus} className="share-icon"/>
+                    <FontAwesomeIcon icon={faSquarePlus}/>
                     <span>Поделиться</span>
                 </ShareButton>
-                <button className="add-board-btn" onClick={toggleSidebar}>
+                <button className="add-board-btn">
                     <FontAwesomeIcon icon={faScrewdriverWrench}/>
                 </button>
             </HeaderButtonsNav>

@@ -20,11 +20,12 @@ type BoardData = {
     lists: List[];
 };
 
-interface BoardViewProps {
+export type BoardViewProps = {
     setBoardName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const BoardView = ({setBoardName}:BoardViewProps) => {
+
     const { id } = useParams<{ id: string }>();
     const [board, setBoard] = useState<BoardData | null>(null);
 
@@ -48,51 +49,18 @@ export const BoardView = ({setBoardName}:BoardViewProps) => {
                 },
                 {
                     id: 3,
-                    title: 'test',
+                    title: 'ready',
                     tasks: [{ id: 21, name: 'Задача 1' }],
                 },
                 {
                     id: 4,
-                    title: 'test',
+                    title: 'ready',
                     tasks: [{ id: 21, name: 'Задача 1' }],
                 },
                 {
                     id: 5,
-                    title: 'test',
+                    title: 'ready',
                     tasks: [{ id: 21, name: 'Задача 1' }],
-                },
-                {
-                    id: 6,
-                    title: 'test',
-                    tasks: [{ id: 21, name: 'Задача 1' }],
-                },
-                {
-                    id: 7,
-                    title: 'test',
-                    tasks: [{ id: 21, name: 'Задача 1' }],
-                },
-            ],
-        },
-        {
-            id: 2,
-            name: 'Second board',
-            lists: [
-                {
-                    id: 3,
-                    title: 'Апрув',
-                    tasks: [
-                        { id: 31, name: 'Задача 1' },
-                        { id: 32, name: 'Задача 2' },
-                        { id: 33, name: 'Задача 3' },
-                    ],
-                },
-                {
-                    id: 4,
-                    title: 'Тест',
-                    tasks: [
-                        { id: 41, name: 'Тест-задача 1' },
-                        { id: 42, name: 'Тест-задача 2' },
-                    ],
                 },
             ],
         },

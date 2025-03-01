@@ -4,14 +4,12 @@ import {Boards} from "../features/boards/Boards";
 import {Members} from "../features/members/Members";
 import {BoardView} from "../features/boards/BoardView";
 
-
-interface AppRoutesProps {
+export type BoardViewProps = {
     setBoardName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 
-export const AppRoutes= ({ setBoardName }: AppRoutesProps) => {
-
+export const AppRoutes= ({setBoardName}: BoardViewProps) => {
     return (
         <Routes>
             <Route path="/boards"
