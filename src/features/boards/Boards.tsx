@@ -14,6 +14,7 @@ export const Boards = () => {
         {id: 1, name: 'Board one'},
     ];
 
+
     return (
         <BoardsContainer>
             {boards.map((board) => (
