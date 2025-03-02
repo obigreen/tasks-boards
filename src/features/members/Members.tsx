@@ -1,14 +1,6 @@
 import React from 'react';
 
-
-type setBoardName = {
-    setBoardTitle: (name: string) => void
-}
-
-export const Members= ({setBoardTitle}: setBoardName) => {
-    React.useEffect(() => {
-        setBoardTitle('Members');
-    }, [setBoardTitle]);
+export const Members= () => {
 
     return (
         <div style={{ color: 'white', padding: 20 }}>

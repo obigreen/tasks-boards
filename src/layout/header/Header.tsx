@@ -5,14 +5,11 @@ import {faScrewdriverWrench} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 
-interface HeaderProps {
-    boardName: string;
-}
 
-export const Header = ({boardName}: HeaderProps) => {
+export const Header = () => {
     return (
         <HeaderWrapper>
-            <HeaderTitle>{boardName}</HeaderTitle>
+            <HeaderTitle>Title</HeaderTitle>
             <HeaderButtonsNav>
                 <ShareButton>
                     <FontAwesomeIcon icon={faSquarePlus}/>

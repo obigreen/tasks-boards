@@ -2,24 +2,20 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import {Boards} from "../features/boards/Boards";
 import {Members} from "../features/members/Members";
-import {BoardView} from "../features/boards/BoardView";
-
-export type BoardViewProps = {
-    setBoardName: React.Dispatch<React.SetStateAction<string>>;
-}
+import {Board} from "../features/boards/Board";
 
 
-export const AppRoutes= ({setBoardName}: BoardViewProps) => {
+export const AppRoutes= () => {
     return (
         <Routes>
             <Route path="/boards"
-                   element={<Boards setBoardName={setBoardName}/>}/>
+                   element={<Boards />}/>
 
             <Route path="/members"
-                   element={<Members setBoardTitle={setBoardName}/>}/>
+                   element={<Members />}/>
 
             <Route path="/boards/:id"
-                   element={<BoardView setBoardName={setBoardName}/>}/>
+                   element={<Board />}/>
         </Routes>
     );
 };

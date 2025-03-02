@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Header} from "./header/Header";
 import {AppRoutes} from "../routes/AppRoutes";
 import styled from "styled-components";
 
 export const Content = () => {
-    const [boardName, setBoardName] = useState('');
 
     return (
         <MainContent>
-            <Header boardName={boardName} />
-            <AppRoutes setBoardName={setBoardName} />
+            <Header />
+            <AppRoutes />
         </MainContent>
     );
 };

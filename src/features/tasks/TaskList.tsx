@@ -1,51 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { TaskCard } from './TaskCard';
+import {TaskCard} from './TaskCard';
 
-type Task = {
-    id: number;
-    name: string;
-};
 
-type List = {
-    title: string;
-    tasks: Task[];
-};
 
-interface TaskListProps {
-    list: List;
-}
+export const TaskList = () => {
 
-export const TaskList = ({ list }:TaskListProps) => {
+    const [tasks, setTasks] = useState([
+        {id: 1, title: 'HTML&CSS', isDone: true},
+        {id: 2, title: 'JS', isDone: true},
+        {id: 3, title: 'ReactJS', isDone: false},
+    ])
+
+
     return (
         <TaskListContainer>
-            <Title>{list.title}</Title>
+            <Title>Task list</Title>
             <TasksWrapper>
-                {list.tasks.map((task) => (
-                    <TaskCard key={task.id} task={task} />
-                ))}
+                <TaskCard/>
             </TasksWrapper>
         </TaskListContainer>
     );
 };
 
 const TaskListContainer = styled.div`
-  background: #212121;
-  padding: 15px;
-  border-radius: 8px;
-  min-width: 250px;
-  height: max-content;
+    background: #212121;
+    padding: 15px;
+    border-radius: 8px;
+    min-width: 250px;
+    height: max-content;
 `;
 
 const Title = styled.h3`
-  text-align: left;
-  color: white;
-  font-weight: 400;
-  margin-bottom: 30px;
+    text-align: left;
+    color: white;
+    font-weight: 400;
+    margin-bottom: 30px;
 `;
 
 const TasksWrapper = styled.div`
-  margin-top: 10px;
+    margin-top: 10px;
 `;
 
 
