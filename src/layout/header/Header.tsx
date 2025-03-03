@@ -35,7 +35,7 @@ const HeaderWrapper = styled.header`
     width: 100%;
 `;
 
-const HeaderTitle = styled.h2`
+const HeaderTitle = styled.h1`
     font-size: 25px;
     font-weight: 200;
 `;
