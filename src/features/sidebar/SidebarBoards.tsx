@@ -53,8 +53,9 @@ const AddBoardButton = styled.button`
     cursor: pointer;
     color: white;
     padding: 0;
-
+    transition: 0.3s;
     &:hover {
+        
         color: #ffba41;
     }
 `;
