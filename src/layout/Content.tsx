@@ -1,4 +1,3 @@
-import React from 'react';
 import {Header} from "./header/Header";
 import {AppRoutes} from "../routes/AppRoutes";
 import styled from "styled-components";

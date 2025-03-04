@@ -1,4 +1,3 @@
-import React from 'react';
 import {TaskType} from "../board/Board";
 import {S} from './BoardList_Styles'
 

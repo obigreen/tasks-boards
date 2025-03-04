@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {BoardList} from '../list/BoardList';
 import {S} from './Board_Styles'
 

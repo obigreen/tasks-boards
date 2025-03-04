@@ -1,4 +1,3 @@
-import React from 'react';
 import {S} from './Boards_Styles'
 
 type Board = {

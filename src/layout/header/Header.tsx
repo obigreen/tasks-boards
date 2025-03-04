@@ -1,4 +1,3 @@
-import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSquarePlus} from "@fortawesome/free-regular-svg-icons";
 import {faScrewdriverWrench} from "@fortawesome/free-solid-svg-icons";

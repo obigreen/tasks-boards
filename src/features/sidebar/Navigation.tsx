@@ -1,4 +1,3 @@
-import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLemon, faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
