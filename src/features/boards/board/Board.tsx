@@ -6,48 +6,82 @@ import styled from "styled-components";
 import {Button} from "../../../components/Button";
 
 
+export type ListsType = {
+    id: string
+    title: string
+}
+
 export type TaskType = {
     id: string;
     title: string;
 }
 
+
+export type ListType = {
+    [key: string]: TaskType[]
+}
+
 export const Board = () => {
 
-    const [tasks, setTasks] = useState<TaskType[]>([
-        {id: v1(), title: 'HTML&CSS'},
-        {id: v1(), title: 'JS'},
-        {id: v1(), title: 'ReactJS'},
+
+    const listId1 = v1();
+    const listId2 = v1();
+
+    const [lists, setLists] = useState<ListsType[]>([
+        {id: listId1, title: 'Задачи'},
+        {id: listId2, title: 'Тестирование'},
     ])
 
-    const removeTask = (taskId: string) => {
-        setTasks(tasks.filter((task) => task.id !== taskId))
+    const [tasks, setTasks] = useState<ListType>({
+
+        [listId1] : [
+            {id: v1(), title: 'HTML&CSS'},
+            {id: v1(), title: 'JS'},
+            {id: v1(), title: 'ReactJS'},
+        ],
+
+
+        [listId2] : [
+            {id: v1(), title: 'CSS'},
+            {id: v1(), title: 'CSS'},
+        ]
+
+
+    })
+
+    const removeTask = (listId: string, taskId: string) => {
+        setTasks({...tasks, [listId]: tasks[listId].filter(task => task.id !== taskId)})
     }
 
-    const addTask = (taskTitle: string) => {
-
+    const addTask = (listId: string, taskTitle: string) => {
         const newTasks = {id: v1(), title: taskTitle};
-        setTasks([...tasks, newTasks])
+        setTasks({...tasks, [listId]: [...tasks[listId], newTasks]})
     }
 
 
     return (
         <S.Container>
             <S.Lists>
-                <BoardList
-                    title="Задачи"
-                    tasks={tasks}
-                    removeTask={removeTask}
-                    addTask={addTask}/>
+                {lists.map((list: ListsType) => (
+                    <BoardList
+                        key={list.id}
+                        list={list}
+                        title={list.title}
+                        tasks={tasks[list.id]}
+                        removeTask={removeTask}
+                        addTask={addTask}
+                    />
+                ))}
                 <Wrapper>
                     <Button>Добавить колонку</Button>
                 </Wrapper>
             </S.Lists>
         </S.Container>
-    );
-}
+    )
+};
 
 const Wrapper = styled.div`
-    
+
     button {
         background-color: #212121;
         min-width: 250px;
