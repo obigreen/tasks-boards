@@ -1,24 +1,33 @@
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 
 
 const Container = styled.div`
+    position: relative;
     background-color: #212121;
     padding: 15px;
     border-radius: 8px;
     min-width: 250px;
+    width: 100%;
+    max-width: 250px;
     height: max-content;
 `;
+
+const TitleWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+`
 
 const Title = styled.h2`
     text-align: left;
     color: white;
     font-weight: 200;
     font-size: 20px;
-    margin-bottom: 30px;
 `;
 
 const List = styled.ul`
-    margin-top: 10px;
+ 
 `;
 
 const Task = styled.li`
@@ -41,33 +50,6 @@ const Task = styled.li`
     }
 `;
 
-const AddTask = styled.div`
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-`
-
-const shake = keyframes`
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-`;
-
-const Input = styled.input<{ error: boolean }>`
-    width: 100%;
-    background: white;
-    padding: 10px;
-    border: none;
-    outline: ${(props) => (props.error ? "1px solid red" : "none")};
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: 200;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-
-    animation: ${(props) => (props.error ? shake : "none")} 0.3s ease-in-out;
-`
 
 const NotTasks = styled.p`
     width: 100%;
@@ -80,5 +62,5 @@ const NotTasks = styled.p`
 `
 
 export const S = {
-    Container, Title, List, Task, AddTask, Input, NotTasks
+    Container, TitleWrapper, Title, List, Task, NotTasks
 }
