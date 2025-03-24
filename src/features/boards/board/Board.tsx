@@ -3,7 +3,6 @@ import {BoardList} from '../list/BoardList';
 import {S} from './Board_Styles'
 import {v1} from "uuid";
 import styled from "styled-components";
-import {Button} from "../../../components/Button";
 import {InputComponent} from "../../../components/InputComponent";
 
 
@@ -50,6 +49,10 @@ export const Board = () => {
     })
 
 
+    const changeTaskTitle = (listId: string, taskId: string, title: string) => {
+        setTasks({...tasks, [listId]: tasks[listId].map(task => task.id === taskId ? {...task, title} : task)});
+    }
+
     //tasks logics
     const removeTask = (listId: string, taskId: string) => {
         setTasks({...tasks, [listId]: tasks[listId].filter(task => task.id !== taskId)})
@@ -62,6 +65,11 @@ export const Board = () => {
 
 
     //todolist logics
+    const changeListTitle = (listId: string, title: string) => {
+        setLists(lists.map(list => list.id === listId ? {...list, title} : list));
+    }
+
+
     const removeList = (listId: string) => {
         setLists(lists.filter(task => task.id !== listId))
         delete tasks[listId];
@@ -70,7 +78,7 @@ export const Board = () => {
 
     const addList = (title: string) => {
         const listId = v1()
-        const newList : ListsType = {id: listId, title}
+        const newList: ListsType = {id: listId, title}
         setLists([...lists, newList])
         setTasks({...tasks, [listId]: []})
     }
@@ -88,11 +96,12 @@ export const Board = () => {
                         removeTask={removeTask}
                         addTask={addTask}
                         removeList={removeList}
+                        changeTaskTitle={changeTaskTitle}
+                        changeListTitle={changeListTitle}
                     />
                 ))}
                 <Wrapper>
-                    <InputComponent onCrateItem={addList} />
-                    {/*<Button>Добавить колонку</Button>*/}
+                    <InputComponent onCrateItem={addList}/>
                 </Wrapper>
             </S.Lists>
         </S.Container>
@@ -101,14 +110,6 @@ export const Board = () => {
 
 const Wrapper = styled.div`
 
-    //button {
-    //    background-color: #212121;
-    //    min-width: 250px;
-    //    opacity: 0.7;
-    //    padding: 15px;
-    //    font-size: 20px;
-    //    cursor: pointer;
-    //}
 `
 
 
