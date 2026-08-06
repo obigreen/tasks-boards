@@ -1,35 +1,51 @@
 import './BoardList.css';
+import type {TaskProps} from "../board/Board.tsx";
+import {Button} from "../../../components/Button.tsx";
 
-export const BoardList = () => {
+
+type Props = {
+    title: string,
+    tasks: TaskProps[];
+    data?: string; //? - не обязательный тип
+    removeTask: (taskId: number) => void;
+}
+
+
+export const BoardList = (props: Props) => {
+
+    const {title, tasks, data, removeTask} = props
+
     return (
         <div className="board-list">
-            <h3>What to learn</h3>
+            <h3>{title}</h3>
 
             <div className="add-task">
                 <input/>
-                <button>+</button>
+                <Button title={"+"} onClick={() => {}}/>
             </div>
 
-            <ul className="tasks">
-                <li>
-                    <input type="checkbox" checked={true}/>
-                    <span>HTML&amp;CSS</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={true}/>
-                    <span>JS</span>
-                </li>
-                <li>
-                    <input type="checkbox" checked={false}/>
-                    <span>React</span>
-                </li>
-            </ul>
+            {tasks.length ?
+                <ul className="tasks">
+                    {tasks.map((task) => (
+                        <li key={task.id}>
+                            <input type="checkbox" checked={task.isDone} readOnly/>
+                            <span>{task.title}</span>
+                            <Button title={"X"} onClick={() => {removeTask(task.id)}}/>
+                        </li>
+                    ))}
+                </ul>
+                :
+                <p className="tasks">not tasks</p>// временный класс для отступа
+            }
+
 
             <div className="filter-buttons">
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <Button title={"All"}/>
+                <Button title={"Active"}/>
+                <Button title={"Completed"}/>
             </div>
+
+            <div>{data}</div>
         </div>
     );
 };
