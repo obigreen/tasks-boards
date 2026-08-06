@@ -1,0 +1,50 @@
+.board-list {
+    min-width: 250px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #212121;
+    color: white;
+}
+
+.board-list h3 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.add-task {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.add-task input {
+    min-width: 0;
+    flex-grow: 1;
+    padding: 6px;
+}
+
+.add-task button {
+    padding: 6px 10px;
+    background-color: white;
+}
+
+.tasks {
+    margin-bottom: 15px;
+}
+
+.tasks li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 0;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.filter-buttons button {
+    padding: 5px 8px;
+    background-color: white;
+}

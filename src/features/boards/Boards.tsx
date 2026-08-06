@@ -9,7 +9,7 @@ type Board = {
 export const Boards = () => {
 
     const boards: Board[] = [
-        {id: 1, name: 'Board one'},
+        {id: 1, name: 'Board one'}
     ];
 
 
