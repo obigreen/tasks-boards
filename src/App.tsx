@@ -6,7 +6,7 @@ import {Content} from "./layout/Content";
 
 function App() {
     return (
-        <Router>
+        <Router basename={import.meta.env.BASE_URL}>
             <main className="App">
                 <Sidebar/>
                 <Content/>
@@ -16,7 +16,6 @@ function App() {
 }
 
 export default App;
-
 
 
 

@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Boards} from "../features/boards/Boards";
 import {Members} from "../features/members/Members";
 import {Board} from "../features/boards/board/Board";
@@ -7,6 +7,9 @@ import {Board} from "../features/boards/board/Board";
 export const AppRoutes = () => {
     return (
         <Routes>
+            <Route path="/"
+                   element={<Navigate to="/boards" replace/>}/>
+
             <Route path="/boards"
                    element={<Boards/>}/>
 
