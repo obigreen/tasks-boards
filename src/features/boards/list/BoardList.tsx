@@ -1,5 +1,5 @@
 import './BoardList.css';
-import type {TaskProps} from "../board/Board.tsx";
+import type {FilterProps, TaskProps} from "../board/Board.tsx";
 import {Button} from "../../../components/Button.tsx";
 
 
@@ -8,12 +8,13 @@ type Props = {
     tasks: TaskProps[];
     data?: string; //? - не обязательный тип
     removeTask: (taskId: number) => void;
+    changeFilter: (filter: FilterProps) => void;
 }
 
 
 export const BoardList = (props: Props) => {
 
-    const {title, tasks, data, removeTask} = props
+    const {title, tasks, data, removeTask, changeFilter} = props
 
 
     const removeTaskHandler = (taskId: number) => {
@@ -45,9 +46,9 @@ export const BoardList = (props: Props) => {
 
 
             <div className="filter-buttons">
-                <Button title={"All"}/>
-                <Button title={"Active"}/>
-                <Button title={"Completed"}/>
+                <Button onClick={() => changeFilter("All")} title={"All"}/>
+                <Button onClick={() => changeFilter("Active")} title={"Active"}/>
+                <Button onClick={() => changeFilter("Completed")} title={"Completed"}/>
             </div>
 
             <div>{data}</div>
