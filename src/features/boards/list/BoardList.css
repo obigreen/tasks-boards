@@ -1,8 +1,9 @@
 .board-list {
-    min-width: 250px;
-    padding: 15px;
+    width: 280px;
+    min-width: 280px;
+    padding: 18px;
     border-radius: 8px;
-    background-color: #212121;
+    background-color: #020618;
     color: white;
 }
 
@@ -20,12 +21,43 @@
 .add-task input {
     min-width: 0;
     flex-grow: 1;
-    padding: 6px;
+    height: 34px;
+    padding: 6px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    background-color: white;
+    color: #111827;
+}
+
+.add-task input:focus {
+    border-color: #94a3b8;
 }
 
 .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 6px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
     background-color: white;
+    color: #111827;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #f3f4f6;
+}
+
+.add-task .button {
+    width: 36px;
+    height: 34px;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    padding: 0;
 }
 
 .tasks {
@@ -39,12 +71,32 @@
     padding: 7px 0;
 }
 
+.tasks input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: #2563eb;
+}
+
+.tasks span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.tasks .button {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    padding: 0;
+}
+
 .filter-buttons {
     display: flex;
     gap: 5px;
+    flex-wrap: wrap;
 }
 
-.filter-buttons button {
+.filter-buttons .button {
     padding: 5px 8px;
     background-color: white;
 }

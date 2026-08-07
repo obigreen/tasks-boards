@@ -1,65 +1,35 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSquarePlus} from "@fortawesome/free-regular-svg-icons";
-import {faScrewdriverWrench} from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
+import {faArrowUpFromBracket, faSliders} from "@fortawesome/free-solid-svg-icons";
 
 
 
 export const Header = () => {
     return (
-        <HeaderWrapper>
-            <HeaderTitle>Title</HeaderTitle>
-            <HeaderButtonsNav>
-                <ShareButton>
-                    <FontAwesomeIcon icon={faSquarePlus}/>
+        <header className="sticky top-0 z-20 flex min-h-20 w-full shrink-0 items-center justify-between border-b border-slate-200 bg-white/95 px-8 py-4 backdrop-blur">
+            <div>
+                <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                    Workspace
+                </p>
+                <h1 className="text-xl font-semibold tracking-tight text-slate-900">Task boards</h1>
+            </div>
+
+            <nav className="flex items-center gap-2" aria-label="Действия рабочего пространства">
+                <button
+                    type="button"
+                    className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 text-sm font-medium text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400 cursor-pointer"
+                >
+                    <FontAwesomeIcon icon={faArrowUpFromBracket} className="text-xs text-slate-500"/>
                     <span>Поделиться</span>
-                </ShareButton>
-                <button className="add-board-btn">
-                    <FontAwesomeIcon icon={faScrewdriverWrench}/>
                 </button>
-            </HeaderButtonsNav>
-        </HeaderWrapper>
+                <button
+                    type="button"
+                    className="inline-flex size-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400 cursor-pointer"
+                    aria-label="Настройки"
+                    title="Настройки"
+                >
+                    <FontAwesomeIcon icon={faSliders}/>
+                </button>
+            </nav>
+        </header>
     );
 };
-
-
-const HeaderWrapper = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #212121;
-    padding: 20px;
-    color: white;
-    flex-shrink: 0;
-    width: 100%;
-`;
-
-const HeaderTitle = styled.h1`
-    font-size: 25px;
-    font-weight: 200;
-`;
-
-const HeaderButtonsNav = styled.nav`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-`;
-
-const ShareButton = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 8px;
-    background-color: white;
-    border: none;
-    border-radius: 5px;
-    transition: 0.3s;
-    cursor: pointer;
-
-    &:hover {
-        color: #ffba41;
-    }
-`;
-

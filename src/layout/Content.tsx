@@ -1,21 +1,14 @@
 import {Header} from "./header/Header";
 import {AppRoutes} from "../routes/AppRoutes";
-import styled from "styled-components";
 
 export const Content = () => {
 
     return (
-        <MainContent>
+        <div className="flex min-w-0 flex-col overflow-y-auto">
             <Header />
-            <AppRoutes />
-        </MainContent>
+            <div className="min-h-0 flex-1">
+                <AppRoutes />
+            </div>
+        </div>
     );
 };
-
-
-const MainContent = styled.div`
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-`;
-

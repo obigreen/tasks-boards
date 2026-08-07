@@ -15,6 +15,11 @@ export const BoardList = (props: Props) => {
 
     const {title, tasks, data, removeTask} = props
 
+
+    const removeTaskHandler = (taskId: number) => {
+        removeTask(taskId);
+    }
+
     return (
         <div className="board-list">
             <h3>{title}</h3>
@@ -30,7 +35,7 @@ export const BoardList = (props: Props) => {
                         <li key={task.id}>
                             <input type="checkbox" checked={task.isDone} readOnly/>
                             <span>{task.title}</span>
-                            <Button title={"X"} onClick={() => {removeTask(task.id)}}/>
+                            <Button title={"X"} onClick={() => removeTaskHandler(task.id)}/>
                         </li>
                     ))}
                 </ul>

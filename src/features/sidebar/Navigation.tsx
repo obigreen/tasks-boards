@@ -1,54 +1,35 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLemon, faUser} from "@fortawesome/free-regular-svg-icons";
-import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {faTableColumns, faUsers} from "@fortawesome/free-solid-svg-icons";
+import {NavLink} from "react-router-dom";
+
+const getNavItemClassName = ({isActive}: {isActive: boolean}) => [
+    "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition",
+    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400",
+    isActive
+        ? "bg-white/10 text-white shadow-sm"
+        : "text-slate-400 hover:bg-white/5 hover:text-slate-100",
+].join(" ");
 
 export const Navigation = () => {
     return (
-        <nav>
-            <NavList>
+        <nav aria-label="Основная навигация">
+            <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-600">
+                Menu
+            </p>
+            <ul className="flex flex-col gap-1">
                 <li>
-                    <NavItem to="/boards">
-                        <FontAwesomeIcon icon={faLemon}/>
+                    <NavLink to="/boards" end className={getNavItemClassName}>
+                        <FontAwesomeIcon icon={faTableColumns} className="w-4 text-slate-500 transition group-hover:text-slate-300"/>
                         <span>Boards</span>
-                    </NavItem>
+                    </NavLink>
                 </li>
                 <li>
-                    <NavItem to="/members">
-                        <FontAwesomeIcon icon={faUser}/>
+                    <NavLink to="/members" className={getNavItemClassName}>
+                        <FontAwesomeIcon icon={faUsers} className="w-4 text-slate-500 transition group-hover:text-slate-300"/>
                         <span>Members</span>
-                    </NavItem>
+                    </NavLink>
                 </li>
-            </NavList>
+            </ul>
         </nav>
     );
 };
-
-const NavList = styled.ul`
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-`;
-
-const NavItem = styled(Link)`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 5px 5px 0;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.3s;
-
-    span {
-        display: block;
-        margin-top: 2px;
-        font-size: 20px;
-    }
-
-    &:hover {
-        color: #ffba41;
-    }
-`;
