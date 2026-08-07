@@ -1,10 +1,11 @@
 import {BoardList} from '../list/BoardList';
 import './Board.css';
 import {useState} from "react";
+import {v1} from "uuid";
 
 
 export type TaskProps = {
-    id: number;
+    id: string;
     title: string;
     isDone: boolean;
 }
@@ -16,9 +17,9 @@ export const Board = () => {
 
     const [statusFilter, setStatusFilter] = useState<FilterProps>("All");
     const [tasks, setTasks] = useState([
-        {id: 1, title: "HTML&CSS", isDone: true},
-        {id: 2, title: "JS", isDone: true},
-        {id: 3, title: "ReactJS", isDone: false},
+        {id: v1(), title: "HTML&CSS", isDone: true},
+        {id: v1(), title: "JS", isDone: true},
+        {id: v1(), title: "ReactJS", isDone: false},
     ])
 
     // filter
@@ -34,8 +35,13 @@ export const Board = () => {
     }
 
     // delete
-    const removeTask = (taskId: number) => {
+    const removeTask = (taskId: string) => {
         setTasks(tasks.filter((task) => task.id !== taskId))
+    }
+
+    const addTask = (newTitle: string) => {
+        const newTask = {id: v1(), title: newTitle, isDone: false}
+        setTasks([newTask, ...tasks])
     }
 
 
@@ -45,7 +51,8 @@ export const Board = () => {
                 title={"What to learn"}
                 tasks={filteredTasks}
                 removeTask={removeTask}
-                changeFilter={changeFilter}/>
+                changeFilter={changeFilter}
+                addTask={addTask}/>
         </div>
     )
 };
