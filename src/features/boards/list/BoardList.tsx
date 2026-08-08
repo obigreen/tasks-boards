@@ -65,17 +65,6 @@ export const BoardList = (props: BoardListProps) => {
         <div className="board-list">
             <h3>{title}</h3>
 
-            <div>
-                <form className={`add-task ${error ? "error" : ""}`} onSubmit={addTaskSubmitHandler}>
-                    <input type={"text"}
-                           value={taskTitle}
-                           onChange={taskTitleHandler}/>
-                    <Button title={"+"}/>
-                </form>
-
-                {error && <span className={"error-message"}>{error}</span>}
-            </div>
-
             {tasks.length ?
                 <ul className="tasks">
                     {tasks.map((task) => (
@@ -90,6 +79,17 @@ export const BoardList = (props: BoardListProps) => {
                 :
                 <p className="tasks">not tasks</p>// временный класс для отступа
             }
+
+            <div>
+                <form className={`add-task ${error ? "error" : ""}`} onSubmit={addTaskSubmitHandler}>
+                    <input type={"text"}
+                           value={taskTitle}
+                           onChange={taskTitleHandler}/>
+                    <Button title={"+"}/>
+                </form>
+
+                {error && <span className={"error-message"}>{error}</span>}
+            </div>
 
 
             <div className="filter-buttons">

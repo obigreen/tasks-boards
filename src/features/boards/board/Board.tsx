@@ -54,7 +54,7 @@ export const Board = () => {
     // add task
     const addTask = (newTitle: string) => {
         const newTask = {id: v1(), title: newTitle, isDone: false}
-        setTasks([newTask, ...tasks])
+        setTasks([...tasks, newTask])
     }
 
 

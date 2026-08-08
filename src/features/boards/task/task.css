@@ -1,0 +1,83 @@
+.tasks {
+display: flex;
+    flex-direction: column;
+}
+
+.tasks li {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 20px 7px;
+    background-color: #020618;
+    color: white;
+    margin-bottom: 15px;
+}
+
+/*.tasks li.isDone {*/
+/*    opacity: 0.6;*/
+/*}*/
+
+.tasks input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: #157940;
+    border-radius: 0;
+    outline: none;
+}
+
+.tasks span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.tasks span.through {
+    text-decoration: line-through;
+}
+
+
+.tasks .button {
+    width: 16px;
+    height: 16px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.filter-buttons .button {
+    padding: 5px 8px;
+    background-color: white;
+    border: none;
+}
+
+
+.add-task.error {
+    outline: 1px solid red;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: red;
+}
+
+.filter-buttons .button.active-filter {
+    background-color: #157940;
+    color: white;
+}
+
+
+
+
+
+.ttt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}

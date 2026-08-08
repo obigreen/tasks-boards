@@ -1,3 +1,4 @@
+import './task.css';
 import {Button} from "../../../components/Button.tsx";
 import type {ChangeEvent} from "react";
 
@@ -27,10 +28,12 @@ export const Task = (props: TaskType) => {
 
     return (
         <li className={taskStatus ? "isDone" : ""}>
-            <input type="checkbox" checked={taskStatus}
-                   onChange={(event) => changeTaskStatusHandler(event, taskId)}/>
             <span className={taskStatus ? "through" : ""}>{taskTitle}</span>
-            <Button title={"X"} onClick={() => removeTaskHandler(taskId)}/>
+            <div className={"ttt"}>
+                <input type="checkbox" checked={taskStatus}
+                       onChange={(event) => changeTaskStatusHandler(event, taskId)}/>
+                <Button title={"X"} onClick={() => removeTaskHandler(taskId)}/>
+            </div>
         </li>
     );
 };
