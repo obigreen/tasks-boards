@@ -4,7 +4,7 @@ import {useState} from "react";
 import {v1} from "uuid";
 
 
-export type TaskProps = {
+export type TasksType = {
     id: string;
     title: string;
     isDone: boolean;
@@ -18,7 +18,7 @@ export const Board = () => {
     const [statusFilter, setStatusFilter] = useState<FilterProps>("All");
     const [tasks, setTasks] = useState([
         {id: v1(), title: "Props/Types", isDone: true},
-        {id: v1(), title: "CRUD Functions", isDone: true},
+        {id: v1(), title: "CRUD Functions for task", isDone: true},
         {id: v1(), title: "Hook useState", isDone: true},
         {id: v1(), title: "onClick, onChange, onKeyUp, onKeyDown, onSubmit", isDone: true},
         {id: v1(), title: "filter(), map(), trim()", isDone: true},
@@ -38,12 +38,12 @@ export const Board = () => {
     if (statusFilter === "Completed") {
         filteredTasks = tasks.filter((task) => task.isDone)
     }
-    const changeFilter = (filter: FilterProps) => {
+    const changeTasksFilter = (filter: FilterProps) => {
         setStatusFilter(filter)
     }
 
     //change task status
-    const changeStatus = (taskId: string, isDone: boolean) => {
+    const changeTaskStatus = (taskId: string, isDone: boolean) => {
         setTasks(tasks.map(task => task.id === taskId ? {...task, isDone } : task))
     }
 
@@ -64,9 +64,9 @@ export const Board = () => {
                 title={"First sprint"}
                 tasks={filteredTasks}
                 removeTask={removeTask}
-                changeFilter={changeFilter}
+                changeTasksFilter={changeTasksFilter}
                 addTask={addTask}
-                changeStatus={changeStatus}
+                changeTaskStatus={changeTaskStatus}
                 filter={statusFilter}/>
         </div>
     )
