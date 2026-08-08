@@ -17,12 +17,20 @@ export const Board = () => {
 
     const [statusFilter, setStatusFilter] = useState<FilterProps>("All");
     const [tasks, setTasks] = useState([
-        {id: v1(), title: "HTML&CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "ReactJS", isDone: false},
+        {id: v1(), title: "Props/Types", isDone: true},
+        {id: v1(), title: "CRUD Functions", isDone: true},
+        {id: v1(), title: "Hook useState", isDone: true},
+        {id: v1(), title: "onClick, onChange, onKeyUp, onKeyDown, onSubmit", isDone: true},
+        {id: v1(), title: "filter(), map(), trim()", isDone: true},
+        {id: v1(), title: "uuid", isDone: true},
+        {id: v1(), title: "Destructuring", isDone: true},
+        {id: v1(), title: "any ? any : any", isDone: true},
+        {id: v1(), title: "Dinamic styles", isDone: true},
+        {id: v1(), title: "event.currentTarget.any", isDone: true},
+        {id: v1(), title: "...spread", isDone: true},
     ])
 
-    // filter
+    // filter tasks group
     let filteredTasks = tasks
     if (statusFilter === "Active") {
         filteredTasks = tasks.filter((task) => !task.isDone)
@@ -34,11 +42,16 @@ export const Board = () => {
         setStatusFilter(filter)
     }
 
-    // delete
+    //change task status
+    const changeStatus = (taskId: string, isDone: boolean) => {
+        setTasks(tasks.map(task => task.id === taskId ? {...task, isDone } : task))
+    }
+
+    // delete task
     const removeTask = (taskId: string) => {
         setTasks(tasks.filter((task) => task.id !== taskId))
     }
-
+    // add task
     const addTask = (newTitle: string) => {
         const newTask = {id: v1(), title: newTitle, isDone: false}
         setTasks([newTask, ...tasks])
@@ -48,11 +61,13 @@ export const Board = () => {
     return (
         <div className="board">
             <BoardList
-                title={"What to learn"}
+                title={"First sprint"}
                 tasks={filteredTasks}
                 removeTask={removeTask}
                 changeFilter={changeFilter}
-                addTask={addTask}/>
+                addTask={addTask}
+                changeStatus={changeStatus}
+                filter={statusFilter}/>
         </div>
     )
 };

@@ -3,14 +3,15 @@ import '../features/boards/list/BoardList.css';
 type ButtonProps = {
     title: string
     onClick?: () => void
+    className?: string
 }
 
 
 export const Button = (props: ButtonProps) => {
 
-    const {title, onClick} = props
+    const {title, onClick, className} = props
 
     return (
-        <button className={"button"} onClick={onClick}>{title}</button>
+        <button className={`button ${className}`} onClick={onClick}>{title}</button>
     );
 };
