@@ -1,54 +1,99 @@
 .board-list {
     width: 280px;
     min-width: 280px;
-    color: #020618;
+    color: #0f172a;
 }
 
 .board-list h3 {
-    margin-bottom: 15px;
+    margin: 0 0 16px;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
 }
 
 .add-task {
     display: flex;
-    margin-bottom: 15px;
+    margin: 14px 0 12px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.add-task:focus-within {
+    border-color: #64748b;
+    box-shadow: 0 0 0 1px #64748b;
 }
 
 .add-task input {
     min-width: 0;
     flex-grow: 1;
-    height: 34px;
-    padding: 6px 8px;
-    border: 1px solid #020618;
+    height: 38px;
+    padding: 8px 10px;
+    border: 0;
     border-radius: 0;
     outline: none;
-    background-color: white;
-    color: #020618;
-}
-
-.add-task input:focus {
-    border-color: #94a3b8;
+    background-color: transparent;
+    color: #0f172a;
+    font-size: 14px;
 }
 
 .button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #020618;
-    background-color: white;
-    color: #020618;
+    border: 1px solid #cbd5e1;
+    border-radius: 0;
+    background-color: #ffffff;
+    color: #0f172a;
     font-size: 14px;
     cursor: pointer;
+    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
 }
 
 .button:hover {
-    background-color: #f3f4f6;
+    border-color: #64748b;
+    background-color: #f8fafc;
 }
 
 .add-task .button {
-    width: 36px;
-    height: 34px;
-    border-left: 0;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-left: 1px solid #cbd5e1;
     border-radius: 0;
+    font-size: 16px;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.filter-buttons .button {
+    min-height: 32px;
+    padding: 5px 10px;
+    border-color: #cbd5e1;
+    background-color: #ffffff;
+    color: #475569;
+}
+
+.filter-buttons .button.active-filter {
+    border-color: #0f172a;
+    background-color: #0f172a;
+    color: #ffffff;
+}
+
+.add-task.error {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 1px #dc2626;
+}
+
+.error-message {
+    display: block;
+    margin: -4px 0 12px;
+    color: #b91c1c;
+    font-size: 12px;
+    line-height: 1.4;
 }

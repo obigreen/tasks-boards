@@ -8,7 +8,7 @@ export const Members= () => {
                 <p className="mt-2 text-sm leading-6 text-slate-500">Manage people who have access to this workspace.</p>
             </div>
 
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-white/60 px-6 py-14 text-center">
+            <div className="rounded-sm border border-dashed border-slate-300 bg-white/70 px-6 py-14 text-center">
                 <p className="text-sm font-medium text-slate-700">Members page content</p>
                 <p className="mt-1 text-sm text-slate-400">Member management will appear here later.</p>
             </div>

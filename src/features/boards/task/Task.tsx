@@ -29,7 +29,7 @@ export const Task = (props: TaskType) => {
     return (
         <li className={taskStatus ? "isDone" : ""}>
             <span className={taskStatus ? "through" : ""}>{taskTitle}</span>
-            <div className={"ttt"}>
+            <div className="task-actions">
                 <input type="checkbox" checked={taskStatus}
                        onChange={(event) => changeTaskStatusHandler(event, taskId)}/>
                 <Button title={"X"} onClick={() => removeTaskHandler(taskId)}/>

@@ -1,83 +1,89 @@
 .tasks {
-display: flex;
+    display: flex;
     flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .tasks li {
+    position: relative;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 6px;
-    padding: 20px 7px;
-    background-color: #020618;
-    color: white;
-    margin-bottom: 15px;
+    gap: 12px;
+    min-height: 64px;
+    padding: 14px 12px 14px 14px;
+    border: 1px solid #334155;
+    border-left: 3px solid #64748b;
+    background-color: #1e293b;
+    color: #f1f5f9;
+    transition: border-color 150ms ease, background-color 150ms ease;
 }
 
-/*.tasks li.isDone {*/
-/*    opacity: 0.6;*/
-/*}*/
+.tasks li:hover {
+    border-color: #475569;
+    border-left-color: #f59e0b;
+    background-color: #263449;
+}
+
+.tasks li.isDone {
+    border-left-color: #16a34a;
+    background-color: #172033;
+}
+
+.tasks li.isDone:hover {
+    border-color: #475569;
+    border-left-color: #22c55e;
+    background-color: #1d2a3d;
+}
 
 .tasks input[type="checkbox"] {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
-    accent-color: #157940;
+    margin: 0;
+    accent-color: #15803d;
     border-radius: 0;
     outline: none;
+    cursor: pointer;
 }
 
 .tasks span {
     min-width: 0;
     overflow-wrap: anywhere;
     font-size: 14px;
-    line-height: 14px;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 .tasks span.through {
+    color: #a8b3c4;
     text-decoration: line-through;
+    text-decoration-color: #64748b;
+    text-decoration-thickness: 1px;
 }
-
 
 .tasks .button {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-color: transparent;
+    background-color: transparent;
+    color: #94a3b8;
+    font-size: 12px;
 }
 
-.filter-buttons {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
+.tasks .button:hover {
+    border-color: #fecaca;
+    background-color: #fef2f2;
+    color: #b91c1c;
 }
 
-.filter-buttons .button {
-    padding: 5px 8px;
-    background-color: white;
-    border: none;
-}
-
-
-.add-task.error {
-    outline: 1px solid red;
-    border-radius: 4px;
-}
-
-.error-message {
-    color: red;
-}
-
-.filter-buttons .button.active-filter {
-    background-color: #157940;
-    color: white;
-}
-
-
-
-
-
-.ttt {
+.task-actions {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 6px;
 }

@@ -1,19 +1,10 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-
-type Board = {
-    id: number;
-    name: string;
-};
+import {boards} from "./boardsData.ts";
 
 
 export const Boards = () => {
-
-    const boards: Board[] = [
-        {id: 1, name: 'Board one'}
-    ];
-
 
     return (
         <section className="w-full max-w-full p-8">
@@ -30,15 +21,15 @@ export const Boards = () => {
                     <Link
                         key={board.id}
                         to={`/boards/${board.id}`}
-                        className="group flex min-h-36 items-end justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500"
+                        className="group flex min-h-36 items-end justify-between rounded-sm border border-slate-300 border-t-2 border-t-amber-400 bg-white p-5 transition-colors hover:border-slate-500 hover:border-t-amber-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500"
                     >
                         <div>
-                            <span className="mb-8 inline-flex size-8 items-center justify-center rounded-lg bg-slate-100 text-xs font-semibold text-slate-500">
+                            <span className="mb-8 inline-flex size-8 items-center justify-center border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-500">
                                 {String(board.id).padStart(2, "0")}
                             </span>
                             <h3 className="text-lg font-semibold text-slate-900">{board.name}</h3>
                         </div>
-                        <span className="inline-flex size-9 items-center justify-center rounded-full border border-slate-200 text-slate-400 transition group-hover:border-slate-300 group-hover:bg-slate-950 group-hover:text-white">
+                        <span className="inline-flex size-9 items-center justify-center border border-slate-300 text-slate-400 transition-colors group-hover:border-slate-950 group-hover:bg-slate-950 group-hover:text-white">
                             <FontAwesomeIcon icon={faArrowRight} className="text-xs"/>
                         </span>
                     </Link>
@@ -47,4 +38,3 @@ export const Boards = () => {
         </section>
     );
 };
-

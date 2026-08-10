@@ -4,7 +4,7 @@ import {SidebarBoards} from "./SidebarBoards";
 
 export const Sidebar = () => {
     return (
-        <aside className="flex h-screen flex-col overflow-y-auto border-r border-white/10 bg-slate-950 px-5 py-6 text-slate-200 shadow-xl shadow-slate-950/10">
+        <aside className="flex h-screen flex-col overflow-y-auto border-r border-slate-800 bg-slate-950 px-5 py-6 text-slate-200">
             <Logo/>
             <div className="my-6 h-px bg-white/10"/>
 
@@ -20,4 +20,3 @@ export const Sidebar = () => {
         </aside>
     );
 };
-
