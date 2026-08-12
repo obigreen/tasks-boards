@@ -6,6 +6,7 @@ import {Task} from "../task/Task.tsx";
 
 type BoardListProps = {
     board: BoardListType;
+    boardId: string;
     tasks: TasksType[];
     title: string;
     removeTask: (boardId: string, taskId: string) => void;
@@ -18,7 +19,7 @@ type BoardListProps = {
 
 export const BoardList = (props: BoardListProps) => {
 
-    const {board: {id, title, filter}, tasks, data, removeTask, changeTasksFilter, addTask, changeTaskStatus} = props
+    const {board: {id, title, filter}, boardId, tasks, data, removeTask, changeTasksFilter, addTask, changeTaskStatus} = props
     const [taskTitle, setTaskTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
@@ -77,7 +78,8 @@ export const BoardList = (props: BoardListProps) => {
                               taskTitle={task.title}
                               taskStatus={task.isDone}
                               removeTask={removeTask}
-                              changeTaskStatus={changeTaskStatus}/>
+                              changeTaskStatus={changeTaskStatus}
+                              boardId={boardId}/>
                     ))}
                 </ul>
                 :

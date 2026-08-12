@@ -5,7 +5,7 @@ import type {BoardListType} from "../board/Board.tsx";
 
 
 type TaskType = {
-    board: BoardListType;
+    boardId: string
     taskId: string;
     taskTitle: string;
     taskStatus: boolean;
@@ -15,7 +15,7 @@ type TaskType = {
 
 export const Task = (props: TaskType) => {
 
-    const {board: {id}, taskId, taskTitle, taskStatus, removeTask, changeTaskStatus} = props
+    const {boardId, taskId, taskTitle, taskStatus, removeTask, changeTaskStatus} = props
 
 
     const removeTaskHandler = (boardId: string, taskId: string) => {
@@ -24,7 +24,7 @@ export const Task = (props: TaskType) => {
 
     const changeTaskStatusHandler = (event: ChangeEvent<HTMLInputElement>, taskId: string) => {
         const newStatusValue = event.currentTarget.checked
-        changeTaskStatus(id, taskId, newStatusValue)
+        changeTaskStatus(boardId, taskId, newStatusValue)
     }
 
 
@@ -33,7 +33,7 @@ export const Task = (props: TaskType) => {
             <span className={taskStatus ? "through" : ""}>{taskTitle}</span>
             <div className="task-actions">
                 <input type="checkbox" checked={taskStatus}
-                       onChange={(event) => changeTaskStatusHandler(event, id, taskId)}/>
+                       onChange={(event) => changeTaskStatusHandler(event, taskId)}/>
                 <Button title={"X"} onClick={() => removeTaskHandler(boardId, taskId)}/>
             </div>
         </li>

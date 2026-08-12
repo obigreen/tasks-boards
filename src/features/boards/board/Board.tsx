@@ -72,7 +72,7 @@ export const Board = () => {
     // add task
     const addTask = (boardId: string, newTitle: string) => {
         const newTask = {id: v1(), title: newTitle, isDone: false}
-        setTasks({...tasks, [boardId]: [tasks[boardId], ...newTask]})
+        setTasks({...tasks, [boardId]: [...tasks[boardId], newTask]})
     }
 
 
@@ -95,7 +95,7 @@ export const Board = () => {
 
                     return (<BoardList
                             key={board.id}
-                            // boardLists={boardLists}
+                            boardId={board.id}
                             board={board}
                             title={board.title}
                             tasks={filteredTasks}
@@ -104,7 +104,6 @@ export const Board = () => {
                             addTask={addTask}
                             changeTaskStatus={changeTaskStatus}/>
                     )
-
                 }
             )}
         </div>
