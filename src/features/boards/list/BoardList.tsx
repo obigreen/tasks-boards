@@ -1,24 +1,24 @@
 import './BoardList.css';
-import type {FilterProps, TasksType} from "../board/Board.tsx";
+import type {BoardListType, FilterProps, TasksType} from "../board/Board.tsx";
 import {Button} from "../../../components/Button.tsx";
 import {type ChangeEvent, type SubmitEvent, useState} from "react";
 import {Task} from "../task/Task.tsx";
 
 type BoardListProps = {
-    title: string,
+    board: BoardListType;
     tasks: TasksType[];
-    removeTask: (taskId: string) => void;
-    changeTasksFilter: (filter: FilterProps) => void;
-    addTask: (newTitle: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void;
-    filter: FilterProps;
+    title: string;
+    removeTask: (boardId: string, taskId: string) => void;
+    changeTasksFilter: (boardId: string, filter: FilterProps) => void;
+    addTask: (boardId: string, newTitle: string) => void
+    changeTaskStatus: (boardId: string, taskId: string, isDone: boolean) => void;
     data?: string; //? - не обязательный тип
 }
 
 
 export const BoardList = (props: BoardListProps) => {
 
-    const {title, tasks, data, removeTask, changeTasksFilter, addTask, changeTaskStatus, filter} = props
+    const {board: {id, title, filter}, tasks, data, removeTask, changeTasksFilter, addTask, changeTaskStatus} = props
     const [taskTitle, setTaskTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
@@ -50,11 +50,15 @@ export const BoardList = (props: BoardListProps) => {
     const addTaskHandler = (newTitle: string) => {
         const trimmenTitle = newTitle.trim()
         if (trimmenTitle !== "") {
-            addTask(trimmenTitle)
+            addTask(id, trimmenTitle)
             setTaskTitle("")
         } else {
             setError("Введите корректное название")
         }
+    }
+
+    const changeFilterHandler = (filter: FilterProps) => {
+        changeTasksFilter(id, filter)
     }
 
 
@@ -93,12 +97,12 @@ export const BoardList = (props: BoardListProps) => {
 
 
             <div className="filter-buttons">
-                <Button className={filter === "All" ? "active-filter" : ""} onClick={() => changeTasksFilter("All")}
+                <Button className={filter === "All" ? "active-filter" : ""} onClick={() => changeFilterHandler("All")}
                         title={"All"}/>
-                <Button className={filter === "Active" ? "active-filter" : ""} onClick={() => changeTasksFilter("Active")}
+                <Button className={filter === "Active" ? "active-filter" : ""} onClick={() => changeFilterHandler("Active")}
                         title={"Active"}/>
                 <Button className={filter === "Completed" ? "active-filter" : ""}
-                        onClick={() => changeTasksFilter("Completed")} title={"Completed"}/>
+                        onClick={() => changeFilterHandler("Completed")} title={"Completed"}/>
             </div>
 
             <div>{data}</div>
