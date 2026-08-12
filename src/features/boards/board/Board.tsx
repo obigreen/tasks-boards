@@ -61,7 +61,7 @@ export const Board = () => {
     //change task status
     const changeTaskStatus = (boardId: string, taskId: string, isDone: boolean) => {
         // setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
-        setTasks({...tasks, [taskId]: tasks[boardId].map(task => task.id === taskId ? {...task, isDone} : task)});
+        setTasks({...tasks, [boardId]: tasks[boardId].map(task => task.id === taskId ? {...task, isDone} : task)});
     }
 
     // delete task

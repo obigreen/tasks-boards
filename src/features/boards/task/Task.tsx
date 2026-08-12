@@ -18,7 +18,7 @@ export const Task = (props: TaskType) => {
     const {boardId, taskId, taskTitle, taskStatus, removeTask, changeTaskStatus} = props
 
 
-    const removeTaskHandler = (boardId: string, taskId: string) => {
+    const removeTaskHandler = (taskId: string) => {
         removeTask(boardId, taskId);
     }
 
@@ -34,7 +34,7 @@ export const Task = (props: TaskType) => {
             <div className="task-actions">
                 <input type="checkbox" checked={taskStatus}
                        onChange={(event) => changeTaskStatusHandler(event, taskId)}/>
-                <Button title={"X"} onClick={() => removeTaskHandler(boardId, taskId)}/>
+                <Button title={"X"} onClick={() => removeTaskHandler(taskId)}/>
             </div>
         </li>
     );
