@@ -5,21 +5,20 @@ import {type ChangeEvent, type SubmitEvent, useState} from "react";
 import {Task} from "../task/Task.tsx";
 
 type BoardListProps = {
-    board: BoardListType;
-    boardId: string;
+    boardList: BoardListType;
+    removeBoardList: (boardListId: string) => void;
     tasks: TasksType[];
-    title: string;
-    removeTask: (boardId: string, taskId: string) => void;
-    changeTasksFilter: (boardId: string, filter: FilterProps) => void;
-    addTask: (boardId: string, newTitle: string) => void
-    changeTaskStatus: (boardId: string, taskId: string, isDone: boolean) => void;
+    removeTask: (boardListId: string, taskId: string) => void;
+    changeTasksFilter: (boardListId: string, filter: FilterProps) => void;
+    addTask: (boardListId: string, newTitle: string) => void
+    changeTaskStatus: (boardListId: string, taskId: string, isDone: boolean) => void;
     data?: string; //? - не обязательный тип
 }
 
 
 export const BoardList = (props: BoardListProps) => {
 
-    const {board: {id, title, filter}, boardId, tasks, data, removeTask, changeTasksFilter, addTask, changeTaskStatus} = props
+    const {boardList: {id, title, filter}, removeBoardList, tasks, removeTask, changeTasksFilter, addTask, changeTaskStatus, data} = props
     const [taskTitle, setTaskTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
@@ -62,13 +61,22 @@ export const BoardList = (props: BoardListProps) => {
         changeTasksFilter(id, filter)
     }
 
+    const removeBoardListHandler = () => {
+        removeBoardList(id)
+    }
 
     // Handlers -------------
 
 
     return (
         <div className="board-list">
-            <h3>{title}</h3>
+
+
+            <header className="board-list-header">
+                <h3>{title}</h3>
+                <Button title={"x"} onClick={removeBoardListHandler}/>
+            </header>
+
 
             {tasks.length ?
                 <ul className="tasks">
@@ -79,7 +87,7 @@ export const BoardList = (props: BoardListProps) => {
                               taskStatus={task.isDone}
                               removeTask={removeTask}
                               changeTaskStatus={changeTaskStatus}
-                              boardId={boardId}/>
+                              boardListId={id}/>
                     ))}
                 </ul>
                 :

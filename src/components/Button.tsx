@@ -1,4 +1,4 @@
-import '../features/boards/list/BoardList.css';
+import './button.css'
 
 type ButtonProps = {
     title: string

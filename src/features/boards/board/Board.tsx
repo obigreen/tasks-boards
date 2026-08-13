@@ -12,6 +12,10 @@ export type TasksType = {
     isDone: boolean;
 }
 
+export type TaskStateType = {
+    [key: string]: TasksType[]
+}
+
 export type BoardListType = {
     id: string;
     title: string;
@@ -30,7 +34,7 @@ export const Board = () => {
     ])
 
 
-    const [tasks, setTasks] = useState({
+    const [tasks, setTasks] = useState<TaskStateType>({
             [boardListsId1]: [
                 {id: v1(), title: "Props/Types", isDone: true},
                 {id: v1(), title: "CRUD Functions for task", isDone: true},
@@ -46,58 +50,76 @@ export const Board = () => {
             ],
             [boardListsId2]: [
                 {id: v1(), title: "Props/Types", isDone: true},
-                {id: v1(), title: "CRUD Functions for task", isDone: true},
+                {id: v1(), title: "CRUD Functions for boardLists", isDone: true},
                 {id: v1(), title: "Hook useState", isDone: true},
+                {id: v1(), title: "onClick", isDone: true},
+                {id: v1(), title: "filter(), map()", isDone: true},
+                {id: v1(), title: "uuid", isDone: true},
                 {id: v1(), title: "Destructuring", isDone: true},
+                {id: v1(), title: "...spread", isDone: true},
             ]
         }
     )
 
+
+    // CRUD for boardlist ---------
     // filter tasks group
-    const changeFilter = (boardId: string, filter: FilterProps) => {
-        setBoardLists(boardLists.map(board => board.id === boardId ? {...board, filter} : board))
+    const changeFilter = (boardListId: string, filter: FilterProps) => {
+        setBoardLists(boardLists.map(boardList => boardList.id === boardListId ? {...boardList, filter} : boardList))
     }
 
+    const removeBoardList = (boardListId: string) => {
+        setBoardLists(boardLists.filter(boardList => boardList.id !== boardListId))
+        const updatedTask = {...tasks}
+        delete updatedTask[boardListId]
+        setTasks(updatedTask)
+    }
+
+    // CRUD for boardlist ---------
+
+    // CRUD for tasks ---------
     //change task status
-    const changeTaskStatus = (boardId: string, taskId: string, isDone: boolean) => {
+    const changeTaskStatus = (boardListId: string, taskId: string, isDone: boolean) => {
         // setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
-        setTasks({...tasks, [boardId]: tasks[boardId].map(task => task.id === taskId ? {...task, isDone} : task)});
+        setTasks({
+            ...tasks,
+            [boardListId]: tasks[boardListId].map(task => task.id === taskId ? {...task, isDone} : task)
+        });
     }
 
     // delete task
-    const removeTask = (boardId: string, taskId: string) => {
+    const removeTask = (boardListId: string, taskId: string) => {
         // setTasks(tasks.filter((task) => task.id !== taskId))
-        setTasks({...tasks, [boardId]: tasks[boardId].filter((task) => task.id !== taskId)})
+        setTasks({...tasks, [boardListId]: tasks[boardListId].filter((task) => task.id !== taskId)})
     }
     // add task
-    const addTask = (boardId: string, newTitle: string) => {
+    const addTask = (boardListId: string, newTitle: string) => {
         const newTask = {id: v1(), title: newTitle, isDone: false}
-        setTasks({...tasks, [boardId]: [...tasks[boardId], newTask]})
+        setTasks({...tasks, [boardListId]: [...tasks[boardListId], newTask]})
     }
-
+    // CRUD for tasks ---------
 
     return (
         <div className="board">
-            {boardLists.map(board => {
+            {boardLists.map(boardList => {
 
 
                     // filter tasks group
-                    const boardTasks = tasks[board.id]
+                    const boardTasks = tasks[boardList.id]
                     let filteredTasks = boardTasks
 
-                    if (board.filter === "Active") {
+                    if (boardList.filter === "Active") {
                         filteredTasks = boardTasks.filter((task) => !task.isDone)
                     }
-                    if (board.filter === "Completed") {
+                    if (boardList.filter === "Completed") {
                         filteredTasks = boardTasks.filter((task) => task.isDone)
                     }
 
 
                     return (<BoardList
-                            key={board.id}
-                            boardId={board.id}
-                            board={board}
-                            title={board.title}
+                            key={boardList.id}
+                            boardList={boardList}
+                            removeBoardList={removeBoardList}
                             tasks={filteredTasks}
                             removeTask={removeTask}
                             changeTasksFilter={changeFilter}

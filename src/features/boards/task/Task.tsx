@@ -1,30 +1,29 @@
 import './task.css';
 import {Button} from "../../../components/Button.tsx";
 import type {ChangeEvent} from "react";
-import type {BoardListType} from "../board/Board.tsx";
 
 
 type TaskType = {
-    boardId: string
+    boardListId: string
     taskId: string;
     taskTitle: string;
     taskStatus: boolean;
-    removeTask: (boardId: string, taskId: string) => void;
-    changeTaskStatus: (boardId: string, taskId: string, isDone: boolean) => void;
+    removeTask: (boardListId: string, taskId: string) => void;
+    changeTaskStatus: (boardListId: string, taskId: string, isDone: boolean) => void;
 }
 
 export const Task = (props: TaskType) => {
 
-    const {boardId, taskId, taskTitle, taskStatus, removeTask, changeTaskStatus} = props
+    const {boardListId, taskId, taskTitle, taskStatus, removeTask, changeTaskStatus} = props
 
 
     const removeTaskHandler = (taskId: string) => {
-        removeTask(boardId, taskId);
+        removeTask(boardListId, taskId);
     }
 
     const changeTaskStatusHandler = (event: ChangeEvent<HTMLInputElement>, taskId: string) => {
         const newStatusValue = event.currentTarget.checked
-        changeTaskStatus(boardId, taskId, newStatusValue)
+        changeTaskStatus(boardListId, taskId, newStatusValue)
     }
 
 

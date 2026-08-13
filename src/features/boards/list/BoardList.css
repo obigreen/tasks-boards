@@ -4,14 +4,31 @@
     color: #0f172a;
 }
 
+.board-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.board-list-header .button {
+    width: 24px;
+    height: 24px;
+    border-color: #0f172a;
+    background-color: transparent;
+    color: #0f172a;
+    font-size: 12px;
+}
+
 .board-list h3 {
-    margin: 0 0 16px;
     font-size: 20px;
     font-weight: 600;
     line-height: 1.25;
     letter-spacing: -0.02em;
 }
 
+
+/*add task block*/
 .add-task {
     display: flex;
     margin: 14px 0 12px;
@@ -38,23 +55,6 @@
     font-size: 14px;
 }
 
-.button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #cbd5e1;
-    border-radius: 0;
-    background-color: #ffffff;
-    color: #0f172a;
-    font-size: 14px;
-    cursor: pointer;
-    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
-}
-
-.button:hover {
-    border-color: #64748b;
-    background-color: #f8fafc;
-}
 
 .add-task .button {
     width: 38px;
