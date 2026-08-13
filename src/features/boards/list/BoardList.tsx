@@ -3,6 +3,7 @@ import type {BoardListType, FilterProps, TasksType} from "../board/Board.tsx";
 import {Button} from "../../../components/Button.tsx";
 import {type ChangeEvent, type SubmitEvent, useState} from "react";
 import {Task} from "../task/Task.tsx";
+import {CreateForm} from "../../../components/CreateForm.tsx";
 
 type BoardListProps = {
     boardList: BoardListType;
@@ -19,42 +20,13 @@ type BoardListProps = {
 export const BoardList = (props: BoardListProps) => {
 
     const {boardList: {id, title, filter}, removeBoardList, tasks, removeTask, changeTasksFilter, addTask, changeTaskStatus, data} = props
-    const [taskTitle, setTaskTitle] = useState("")
-    const [error, setError] = useState<string | null>(null)
+
 
 
     // Handlers -------------
-    const taskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setTaskTitle(event.currentTarget.value)
-        setError(null)
-    }
 
-    // ----------===
-    // Клик по submit-кнопке и нажатие Enter в input приводят к одному событию submit формы.
-    const addTaskSubmitHandler = (event: SubmitEvent<HTMLFormElement>) => {
-        addTaskHandler(taskTitle)
-        event.preventDefault()
-    }
-
-    // Отдельный onKeyDown/onKeyUp здесь не нужен: при нажатии Enter keyboard handler
-    // вызовет addTaskHandler, а затем стандартный submit формы вызовет его повторно.
-    // preventDefault в submit handler отменяет стандартную перезагрузку/переход страницы.
-    // const addTaskKeyboard = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    //     if (event.key === "Enter") {
-    //         addTaskHandler(taskTitle)
-    //     }
-    // }
-    // ----------===
-
-
-    const addTaskHandler = (newTitle: string) => {
-        const trimmenTitle = newTitle.trim()
-        if (trimmenTitle !== "") {
-            addTask(id, trimmenTitle)
-            setTaskTitle("")
-        } else {
-            setError("Введите корректное название")
-        }
+    const addTaskHandlers = () => {
+        addTask(id, title)
     }
 
     const changeFilterHandler = (filter: FilterProps) => {
@@ -95,14 +67,7 @@ export const BoardList = (props: BoardListProps) => {
             }
 
             <div>
-                <form className={`add-task ${error ? "error" : ""}`} onSubmit={addTaskSubmitHandler}>
-                    <input type={"text"}
-                           value={taskTitle}
-                           onChange={taskTitleHandler}/>
-                    <Button title={"+"}/>
-                </form>
-
-                {error && <span className={"error-message"}>{error}</span>}
+                <CreateForm onCreate={addTaskHandlers}/>
             </div>
 
 

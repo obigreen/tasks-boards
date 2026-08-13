@@ -2,6 +2,7 @@ import {BoardList} from '../list/BoardList';
 import './Board.css';
 import {useState} from "react";
 import {v1} from "uuid";
+import {CreateForm} from "../../../components/CreateForm.tsx";
 
 
 export type FilterProps = "All" | "Active" | "Completed";
@@ -62,20 +63,33 @@ export const Board = () => {
     )
 
 
-    // CRUD for boardlist ---------
+    // CRUD for boardList ---------
     // filter tasks group
     const changeFilter = (boardListId: string, filter: FilterProps) => {
         setBoardLists(boardLists.map(boardList => boardList.id === boardListId ? {...boardList, filter} : boardList))
     }
 
+    // delete boardList with into tasks, not mutation
     const removeBoardList = (boardListId: string) => {
         setBoardLists(boardLists.filter(boardList => boardList.id !== boardListId))
+        // копируем стейт в новую переменную
         const updatedTask = {...tasks}
+        // удаляем таски из копии
         delete updatedTask[boardListId]
+        // возвращаем не мутабельный стейт с удаленными тасками из удаляемого листа тасок
         setTasks(updatedTask)
     }
 
-    // CRUD for boardlist ---------
+    // create new boardList
+    const addBoardList = (newTitle: string) => {
+        const boardListId = v1();
+        // применяем тип BoardListType к новому списку чтобы явно указать какие тут есть типы
+        const newBoardList: BoardListType = {id: boardListId, title: newTitle, filter: "All"}
+        setBoardLists([...boardLists, newBoardList])
+        // создаем сразу пустой массив тасок, чтобы не получить undefined
+        setTasks({...tasks, [boardListId]: []})
+    }
+    // CRUD for boardList ---------
 
     // CRUD for tasks ---------
     //change task status
@@ -92,7 +106,7 @@ export const Board = () => {
         // setTasks(tasks.filter((task) => task.id !== taskId))
         setTasks({...tasks, [boardListId]: tasks[boardListId].filter((task) => task.id !== taskId)})
     }
-    // add task
+    // create new task
     const addTask = (boardListId: string, newTitle: string) => {
         const newTask = {id: v1(), title: newTitle, isDone: false}
         setTasks({...tasks, [boardListId]: [...tasks[boardListId], newTask]})
@@ -128,6 +142,7 @@ export const Board = () => {
                     )
                 }
             )}
+            <CreateForm onCreate={addBoardList}/>
         </div>
     )
 };

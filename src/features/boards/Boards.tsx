@@ -9,11 +9,7 @@ export const Boards = () => {
     return (
         <section className="w-full max-w-full p-8">
             <div className="mb-7">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-amber-600">Workspace</p>
                 <h2 className="text-3xl font-semibold tracking-tight text-slate-950">Your boards</h2>
-                <p className="mt-2 max-w-xl text-sm leading-6 text-slate-500">
-                    Open a board to manage tasks and continue working with your list.
-                </p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
