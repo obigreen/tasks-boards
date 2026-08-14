@@ -1,0 +1,16 @@
+.edit-input {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+
+.edit-text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}

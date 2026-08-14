@@ -1,0 +1,33 @@
+.form-add {
+    display: flex;
+    margin-bottom: 12px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    max-width: 280px;
+    width: 100%;
+}
+
+
+.form-add input {
+    min-width: 0;
+    flex-grow: 1;
+    height: 38px;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    background-color: transparent;
+    color: #0f172a;
+    font-size: 14px;
+}
+
+
+.form-add .button {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-left: 1px solid #cbd5e1;
+    border-radius: 0;
+    font-size: 16px;
+}

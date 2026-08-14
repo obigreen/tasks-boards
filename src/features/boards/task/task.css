@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin: 0;
     padding: 0;
     list-style: none;
+    margin-bottom: 14px;
 }
 
 .tasks li {
@@ -50,15 +50,7 @@
     cursor: pointer;
 }
 
-.tasks span {
-    min-width: 0;
-    overflow-wrap: anywhere;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.4;
-}
-
-.tasks span.through {
+.through {
     color: #a8b3c4;
     text-decoration: line-through;
     text-decoration-color: #64748b;

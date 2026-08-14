@@ -1,16 +1,18 @@
 import './BoardList.css';
 import type {BoardListType, FilterProps, TasksType} from "../board/Board.tsx";
 import {Button} from "../../../components/Button.tsx";
-import {type ChangeEvent, type SubmitEvent, useState} from "react";
 import {Task} from "../task/Task.tsx";
 import {CreateForm} from "../../../components/CreateForm.tsx";
+import {EditText} from "../../../components/EditText.tsx";
 
 type BoardListProps = {
     boardList: BoardListType;
     removeBoardList: (boardListId: string) => void;
+    updateBoardListTitle: (boardListId: string, newTitle: string) => void
     tasks: TasksType[];
     removeTask: (boardListId: string, taskId: string) => void;
     changeTasksFilter: (boardListId: string, filter: FilterProps) => void;
+    updateTaskTitle: (boardListId: string, taskId: string, newTitle: string) => void
     addTask: (boardListId: string, newTitle: string) => void
     changeTaskStatus: (boardListId: string, taskId: string, isDone: boolean) => void;
     data?: string; //? - не обязательный тип
@@ -19,33 +21,31 @@ type BoardListProps = {
 
 export const BoardList = (props: BoardListProps) => {
 
-    const {boardList: {id, title, filter}, removeBoardList, tasks, removeTask, changeTasksFilter, addTask, changeTaskStatus, data} = props
-
-
+    const {boardList: {id, title, filter}, removeBoardList, updateBoardListTitle, tasks, removeTask, changeTasksFilter, updateTaskTitle, addTask, changeTaskStatus, data} = props
 
     // Handlers -------------
-
-    const addTaskHandlers = () => {
-        addTask(id, title)
+    const addTaskHandlers = (newTitle: string) => {
+        addTask(id, newTitle)
     }
-
     const changeFilterHandler = (filter: FilterProps) => {
         changeTasksFilter(id, filter)
     }
-
     const removeBoardListHandler = () => {
         removeBoardList(id)
     }
-
+    const updateBoardListTitleHandler = (newTitle: string) => {
+        updateBoardListTitle(id, newTitle)
+    }
     // Handlers -------------
 
 
     return (
         <div className="board-list">
 
-
             <header className="board-list-header">
-                <h3>{title}</h3>
+                <h3>
+                    <EditText value={title} onChange={updateBoardListTitleHandler} className={"board-list-title"}/>
+                </h3>
                 <Button title={"x"} onClick={removeBoardListHandler}/>
             </header>
 
@@ -59,7 +59,8 @@ export const BoardList = (props: BoardListProps) => {
                               taskStatus={task.isDone}
                               removeTask={removeTask}
                               changeTaskStatus={changeTaskStatus}
-                              boardListId={id}/>
+                              boardListId={id}
+                              updateTaskTitle={updateTaskTitle}/>
                     ))}
                 </ul>
                 :
@@ -69,7 +70,6 @@ export const BoardList = (props: BoardListProps) => {
             <div>
                 <CreateForm onCreate={addTaskHandlers}/>
             </div>
-
 
             <div className="filter-buttons">
                 <Button className={filter === "All" ? "active-filter" : ""} onClick={() => changeFilterHandler("All")}

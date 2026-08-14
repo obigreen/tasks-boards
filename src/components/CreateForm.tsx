@@ -1,9 +1,10 @@
 import {type ChangeEvent, type SubmitEvent, useState} from "react";
 import {Button} from "./Button.tsx";
+import "./createForm.css"
 
 
 type CreateFormProps = {
-    onCreate: (title: string) => void;
+    onCreate: (newTitle: string) => void;
 }
 
 
@@ -14,18 +15,16 @@ export const CreateForm = (props: CreateFormProps) => {
     const [title, setTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
-    const taskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    // Handlers -------------
+    const titleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTitle(event.currentTarget.value)
         setError(null)
     }
-
     // Клик по submit-кнопке и нажатие Enter в input приводят к одному событию submit формы.
     const addSubmitHandler = (event: SubmitEvent<HTMLFormElement>) => {
         addHandler(title)
         event.preventDefault()
     }
-
-
     const addHandler = (newTitle: string) => {
         const trimmenTitle = newTitle.trim()
         if (trimmenTitle !== "") {
@@ -36,7 +35,6 @@ export const CreateForm = (props: CreateFormProps) => {
         }
     }
 
-
     // Отдельный onKeyDown/onKeyUp здесь не нужен: при нажатии Enter keyboard handler
     // вызовет addTaskHandler, а затем стандартный submit формы вызовет его повторно.
     // preventDefault в submit handler отменяет стандартную перезагрузку/переход страницы.
@@ -45,15 +43,13 @@ export const CreateForm = (props: CreateFormProps) => {
     //         addTaskHandler(taskTitle)
     //     }
     // }
-
+    // Handlers -------------
 
     return (
-
-        <form className={`add-task ${error ? "error" : ""}`} onSubmit={addSubmitHandler}>
+        <form className={`form-add ${error ? "error" : ""}`} onSubmit={addSubmitHandler}>
             <input type={"text"}
                    value={title}
-                   onChange={taskTitleHandler}/>
-
+                   onChange={titleHandler}/>
             <Button title={"+"}/>
             {error && <span className={"error-message"}>{error}</span>}
         </form>

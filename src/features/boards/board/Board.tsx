@@ -53,7 +53,7 @@ export const Board = () => {
                 {id: v1(), title: "Props/Types", isDone: true},
                 {id: v1(), title: "CRUD Functions for boardLists", isDone: true},
                 {id: v1(), title: "Hook useState", isDone: true},
-                {id: v1(), title: "onClick", isDone: true},
+                {id: v1(), title: "onClick, onBlur, onDoubleClick, autoFocus", isDone: true},
                 {id: v1(), title: "filter(), map()", isDone: true},
                 {id: v1(), title: "uuid", isDone: true},
                 {id: v1(), title: "Destructuring", isDone: true},
@@ -62,13 +62,11 @@ export const Board = () => {
         }
     )
 
-
     // CRUD for boardList ---------
     // filter tasks group
     const changeFilter = (boardListId: string, filter: FilterProps) => {
         setBoardLists(boardLists.map(boardList => boardList.id === boardListId ? {...boardList, filter} : boardList))
     }
-
     // delete boardList with into tasks, not mutation
     const removeBoardList = (boardListId: string) => {
         setBoardLists(boardLists.filter(boardList => boardList.id !== boardListId))
@@ -79,7 +77,6 @@ export const Board = () => {
         // возвращаем не мутабельный стейт с удаленными тасками из удаляемого листа тасок
         setTasks(updatedTask)
     }
-
     // create new boardList
     const addBoardList = (newTitle: string) => {
         const boardListId = v1();
@@ -88,6 +85,10 @@ export const Board = () => {
         setBoardLists([...boardLists, newBoardList])
         // создаем сразу пустой массив тасок, чтобы не получить undefined
         setTasks({...tasks, [boardListId]: []})
+    }
+    // update boardList title
+    const updateBoardListTitle = (boardListId: string, newTitle: string) => {
+        setBoardLists(boardLists.map(boardList => boardList.id === boardListId ? {...boardList, newTitle} : boardList))
     }
     // CRUD for boardList ---------
 
@@ -100,7 +101,6 @@ export const Board = () => {
             [boardListId]: tasks[boardListId].map(task => task.id === taskId ? {...task, isDone} : task)
         });
     }
-
     // delete task
     const removeTask = (boardListId: string, taskId: string) => {
         // setTasks(tasks.filter((task) => task.id !== taskId))
@@ -111,13 +111,15 @@ export const Board = () => {
         const newTask = {id: v1(), title: newTitle, isDone: false}
         setTasks({...tasks, [boardListId]: [...tasks[boardListId], newTask]})
     }
+    // update task title
+    const updateTaskTitle = (boardListId: string, taskId: string, newTitle: string) => {
+        setTasks({...tasks, [boardListId]: tasks[boardListId].map(task => task.id === taskId ? {...task, title: newTitle} : task)})
+    }
     // CRUD for tasks ---------
 
     return (
         <div className="board">
             {boardLists.map(boardList => {
-
-
                     // filter tasks group
                     const boardTasks = tasks[boardList.id]
                     let filteredTasks = boardTasks
@@ -129,7 +131,6 @@ export const Board = () => {
                         filteredTasks = boardTasks.filter((task) => task.isDone)
                     }
 
-
                     return (<BoardList
                             key={boardList.id}
                             boardList={boardList}
@@ -138,7 +139,9 @@ export const Board = () => {
                             removeTask={removeTask}
                             changeTasksFilter={changeFilter}
                             addTask={addTask}
-                            changeTaskStatus={changeTaskStatus}/>
+                            changeTaskStatus={changeTaskStatus}
+                            updateTaskTitle={updateTaskTitle}
+                            updateBoardListTitle={updateBoardListTitle}/>
                     )
                 }
             )}
