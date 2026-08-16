@@ -58,6 +58,8 @@ export const Board = () => {
                 {id: v1(), title: "uuid", isDone: true},
                 {id: v1(), title: "Destructuring", isDone: true},
                 {id: v1(), title: "...spread", isDone: true},
+                {id: v1(), title: "Tailwind", isDone: true},
+                {id: v1(), title: "Redux", isDone: true},
             ]
         }
     )
