@@ -9,6 +9,10 @@ export const boardListReducer = (state: BoardListType[] = initialState, action: 
             return state
         }
 
+        case 'add_boardList': {
+            return state
+        }
+
         default:
             return state
     }
