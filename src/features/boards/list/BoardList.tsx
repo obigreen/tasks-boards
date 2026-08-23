@@ -7,10 +7,10 @@ import {EditText} from "../../../components/EditText.tsx";
 
 type BoardListProps = {
     boardList: BoardListType;
-    removeBoardList: (boardListId: string) => void;
+    deleteBoardList: (boardListId: string) => void;
     updateBoardListTitle: (boardListId: string, newTitle: string) => void
     tasks: TasksType[];
-    removeTask: (boardListId: string, taskId: string) => void;
+    deleteTask: (boardListId: string, taskId: string) => void;
     changeTasksFilter: (boardListId: string, filter: FilterProps) => void;
     updateTaskTitle: (boardListId: string, taskId: string, newTitle: string) => void
     addTask: (boardListId: string, newTitle: string) => void
@@ -21,7 +21,7 @@ type BoardListProps = {
 
 export const BoardList = (props: BoardListProps) => {
 
-    const {boardList: {id, title, filter}, removeBoardList, updateBoardListTitle, tasks, removeTask, changeTasksFilter, updateTaskTitle, addTask, changeTaskStatus, data} = props
+    const {boardList: {id, title, filter}, deleteBoardList, updateBoardListTitle, tasks, deleteTask, changeTasksFilter, updateTaskTitle, addTask, changeTaskStatus, data} = props
 
     // Handlers -------------
     const addTaskHandlers = (newTitle: string) => {
@@ -30,8 +30,8 @@ export const BoardList = (props: BoardListProps) => {
     const changeFilterHandler = (filter: FilterProps) => {
         changeTasksFilter(id, filter)
     }
-    const removeBoardListHandler = () => {
-        removeBoardList(id)
+    const deleteBoardListHandler = () => {
+        deleteBoardList(id)
     }
     const updateBoardListTitleHandler = (newTitle: string) => {
         updateBoardListTitle(id, newTitle)
@@ -46,7 +46,7 @@ export const BoardList = (props: BoardListProps) => {
                 <h3>
                     <EditText value={title} onChange={updateBoardListTitleHandler} className={"board-list-title"}/>
                 </h3>
-                <Button title={"x"} onClick={removeBoardListHandler}/>
+                <Button title={"x"} onClick={deleteBoardListHandler}/>
             </header>
 
 
@@ -57,7 +57,7 @@ export const BoardList = (props: BoardListProps) => {
                               taskId={task.id}
                               taskTitle={task.title}
                               taskStatus={task.isDone}
-                              removeTask={removeTask}
+                              deleteTask={deleteTask}
                               changeTaskStatus={changeTaskStatus}
                               boardListId={id}
                               updateTaskTitle={updateTaskTitle}/>

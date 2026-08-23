@@ -52,14 +52,17 @@ export const Board = () => {
             [boardListsId2]: [
                 {id: v1(), title: "Props/Types", isDone: true},
                 {id: v1(), title: "CRUD Functions for boardLists", isDone: true},
-                {id: v1(), title: "Hook useState", isDone: true},
+                {id: v1(), title: "Hooks useState, useReducer", isDone: true},
                 {id: v1(), title: "onClick, onBlur, onDoubleClick, autoFocus", isDone: true},
                 {id: v1(), title: "filter(), map()", isDone: true},
                 {id: v1(), title: "uuid", isDone: true},
                 {id: v1(), title: "Destructuring", isDone: true},
                 {id: v1(), title: "...spread", isDone: true},
                 {id: v1(), title: "Tailwind", isDone: true},
-                {id: v1(), title: "Redux", isDone: true},
+                {id: v1(), title: "Reducer, Redux", isDone: true},
+                {id: v1(), title: "TDD (Vitest)", isDone: true},
+                {id: v1(), title: "ReturnType, typeof(in TS)", isDone: true},
+                {id: v1(), title: "as const", isDone: true},
             ]
         }
     )
@@ -70,7 +73,7 @@ export const Board = () => {
         setBoardLists(boardLists.map(boardList => boardList.id === boardListId ? {...boardList, filter} : boardList))
     }
     // delete boardList with into tasks, not mutation
-    const removeBoardList = (boardListId: string) => {
+    const deleteBoardList = (boardListId: string) => {
         setBoardLists(boardLists.filter(boardList => boardList.id !== boardListId))
         // копируем стейт в новую переменную
         const updatedTask = {...tasks}
@@ -104,7 +107,7 @@ export const Board = () => {
         });
     }
     // delete task
-    const removeTask = (boardListId: string, taskId: string) => {
+    const deleteTask = (boardListId: string, taskId: string) => {
         // setTasks(tasks.filter((task) => task.id !== taskId))
         setTasks({...tasks, [boardListId]: tasks[boardListId].filter((task) => task.id !== taskId)})
     }
@@ -136,9 +139,9 @@ export const Board = () => {
                     return (<BoardList
                             key={boardList.id}
                             boardList={boardList}
-                            removeBoardList={removeBoardList}
+                            deleteBoardList={deleteBoardList}
                             tasks={filteredTasks}
-                            removeTask={removeTask}
+                            deleteTask={deleteTask}
                             changeTasksFilter={changeFilter}
                             addTask={addTask}
                             changeTaskStatus={changeTaskStatus}
