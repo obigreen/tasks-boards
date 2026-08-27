@@ -7,7 +7,7 @@ const initialState: BoardListType[] = []
 export const boardListReducer = (state: BoardListType[] = initialState, action: Actions): BoardListType[] => {
     switch (action.type) {
         case 'delete_boardList': {
-            return state.filter(boardList => boardList.id !== action.payload.id)
+            return state.filter(boardList => boardList.id !== action.payload.boardListId)
         }
 
         case 'add_boardList': {
@@ -16,11 +16,11 @@ export const boardListReducer = (state: BoardListType[] = initialState, action: 
         }
 
         case 'update_boardListTitle': {
-            return state.map(boardList => boardList.id === action.payload.id ? {...boardList, title: action.payload.title} : boardList)
+            return state.map(boardList => boardList.id === action.payload.boardListId ? {...boardList, title: action.payload.title} : boardList)
         }
 
         case 'change_filter': {
-            return state.map(boardList => boardList.id === action.payload.id ? {...boardList, filter: action.payload.filter} : boardList)
+            return state.map(boardList => boardList.id === action.payload.boardListId ? {...boardList, filter: action.payload.filter} : boardList)
         }
 
         default:
@@ -28,10 +28,10 @@ export const boardListReducer = (state: BoardListType[] = initialState, action: 
     }
 }
 
-export const deleteBoardListAC = (id: string) => {
+export const deleteBoardListAC = (boardListId: string) => {
     return {
         type: 'delete_boardList',
-        payload: {id}
+        payload: {boardListId}
     } as const
 }
 
@@ -42,17 +42,17 @@ export const addBoardListAC = (title: string) => {
     } as const
 }
 
-export const updateBoardListTitleAC = (id: string, title: string) => {
+export const updateBoardListTitleAC = (boardListId: string, title: string) => {
     return {
         type: 'update_boardListTitle',
-        payload: {id, title}
+        payload: {boardListId, title}
     } as const
 }
 
-export const changeFilterAC = (id: string, filter: FilterProps) => {
+export const changeFilterAC = (boardListId: string, filter: FilterProps) => {
     return {
         type: 'change_filter',
-        payload: { id, filter }
+        payload: { boardListId, filter }
     } as const
 }
 
