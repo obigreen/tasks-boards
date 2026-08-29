@@ -1,10 +1,18 @@
 import type {TaskStateType} from "../features/boards/board/Board.tsx";
+import type {DeleteBoardListAction} from "./boardList-reducer.ts";
 
 
 const taskState: TaskStateType = {}
 
 export const taskReducer = (state: TaskStateType = taskState, action: Action) => {
     switch (action.type) {
+        // board list
+        case 'delete_boardList': {
+            const newState = {...state}
+            delete newState[action.payload.boardListId]
+            return newState
+        }
+
         case 'delete-task': {
             return {...state, [action.payload.boardListId]: state[action.payload.boardListId].filter(task => task.id !== action.payload.taskId)}
         }
@@ -26,4 +34,4 @@ export const deleleTaskAC = (boardListId: string, taskId: string) => {
 export type deleleTaskType = ReturnType<typeof deleleTaskAC>
 
 
-type Action = deleleTaskType
+type Action = DeleteBoardListAction | deleleTaskType
