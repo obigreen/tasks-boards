@@ -29,6 +29,6 @@ test('array should be deleted boardList', () => {
     const endState = taskReducer(startState, deleteBoardListAC("boardListId2"))
     const keys = Object.keys(endState)
     expect(keys.length).toBe(1)
-    expect(endState["boardListId2"]).not.toBeDefined()
+    expect(endState["boardListId1"]).toBeDefined()
     expect(endState["boardListId2"]).toBeUndefined()
 })
