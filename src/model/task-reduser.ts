@@ -1,5 +1,5 @@
 import type {TaskStateType} from "../features/boards/board/Board.tsx";
-import type {DeleteBoardListAction} from "./boardList-reducer.ts";
+import type {AddBoardListAction, DeleteBoardListAction} from "./boardList-reducer.ts";
 
 
 const taskState: TaskStateType = {}
@@ -11,6 +11,10 @@ export const taskReducer = (state: TaskStateType = taskState, action: Action) =>
             const newState = {...state}
             delete newState[action.payload.boardListId]
             return newState
+        }
+
+        case 'add_boardList': {
+            return state
         }
 
         case 'delete-task': {
@@ -34,4 +38,4 @@ export const deleleTaskAC = (boardListId: string, taskId: string) => {
 export type deleleTaskType = ReturnType<typeof deleleTaskAC>
 
 
-type Action = DeleteBoardListAction | deleleTaskType
+type Action = DeleteBoardListAction | AddBoardListAction | deleleTaskType
