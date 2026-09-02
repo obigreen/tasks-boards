@@ -1,8 +1,15 @@
 import {BoardList} from '../list/BoardList';
 import './Board.css';
-import {useState} from "react";
+import {useReducer, useState} from "react";
 import {v1} from "uuid";
 import {CreateForm} from "../../../components/CreateForm.tsx";
+import {
+    addBoardListAC,
+    boardListReducer,
+    changeFilterAC,
+    deleteBoardListAC,
+    updateBoardListTitleAC
+} from "../../../model/boardList-reducer.ts";
 
 
 export type FilterProps = "All" | "Active" | "Completed";
@@ -29,7 +36,7 @@ export const Board = () => {
     const boardListsId1 = v1();
     const boardListsId2 = v1();
 
-    const [boardLists, setBoardLists] = useState<BoardListType[]>([
+    const [boardLists, dispatchBoardLists] = useReducer(boardListReducer, [
         {id: boardListsId1, title: "First sprint", filter: "All"},
         {id: boardListsId2, title: "Second sprint", filter: "All"},
     ])
@@ -70,30 +77,24 @@ export const Board = () => {
     // CRUD for boardList ---------
     // filter tasks group
     const changeFilter = (boardListId: string, filter: FilterProps) => {
-        setBoardLists(boardLists.map(boardList => boardList.id === boardListId ? {...boardList, filter} : boardList))
+        dispatchBoardLists(changeFilterAC(boardListId, filter))
     }
     // delete boardList with into tasks, not mutation
     const deleteBoardList = (boardListId: string) => {
-        setBoardLists(boardLists.filter(boardList => boardList.id !== boardListId))
-        // копируем стейт в новую переменную
+        dispatchBoardLists(deleteBoardListAC(boardListId))
         const updatedTask = {...tasks}
-        // удаляем таски из копии
         delete updatedTask[boardListId]
-        // возвращаем не мутабельный стейт с удаленными тасками из удаляемого листа тасок
         setTasks(updatedTask)
     }
     // create new boardList
     const addBoardList = (newTitle: string) => {
-        const boardListId = v1();
-        // применяем тип BoardListType к новому списку чтобы явно указать какие тут есть типы
-        const newBoardList: BoardListType = {id: boardListId, title: newTitle, filter: "All"}
-        setBoardLists([...boardLists, newBoardList])
-        // создаем сразу пустой массив тасок, чтобы не получить undefined
-        setTasks({...tasks, [boardListId]: []})
+        const action = addBoardListAC(newTitle)
+        dispatchBoardLists(action)
+        setTasks({...tasks, [action.payload.id]: []})
     }
     // update boardList title
     const updateBoardListTitle = (boardListId: string, newTitle: string) => {
-        setBoardLists(boardLists.map(boardList => boardList.id === boardListId ? {...boardList, newTitle} : boardList))
+        dispatchBoardLists(updateBoardListTitleAC(boardListId, newTitle))
     }
     // CRUD for boardList ---------
 
