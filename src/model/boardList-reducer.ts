@@ -4,7 +4,7 @@ import {v1} from "uuid";
 const initialState: BoardListType[] = []
 
 
-export const boardListReducer = (state: BoardListType[] = initialState, action: Actions): BoardListType[] => {
+export const boardListReducer = (state: BoardListType[], action: Actions): BoardListType[] => {
     switch (action.type) {
         case 'delete_boardList': {
             return state.filter(boardList => boardList.id !== action.payload.boardListId)
