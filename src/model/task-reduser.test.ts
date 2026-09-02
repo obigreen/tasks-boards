@@ -1,7 +1,7 @@
 import {beforeEach, expect, test} from "vitest";
 import type {TaskStateType} from "../features/boards/board/Board.tsx";
 import {taskReducer} from "./task-reduser.ts";
-import {deleteBoardListAC} from "./boardList-reducer.ts";
+import {addBoardListAC, deleteBoardListAC} from "./boardList-reducer.ts";
 
 let startState: TaskStateType = {}
 
@@ -21,7 +21,6 @@ beforeEach(() => {
     }
 
 
-
 })
 
 
@@ -31,4 +30,16 @@ test('array should be deleted boardList', () => {
     expect(keys.length).toBe(1)
     expect(endState["boardListId1"]).toBeDefined()
     expect(endState["boardListId2"]).toBeUndefined()
+})
+
+
+test('array should be added boardList', () => {
+    const endState = taskReducer(startState, addBoardListAC("New boardList"))
+    const keys = Object.keys(endState)
+    const newKeys = keys.find(key => key !== "boardListId1" && key !== "boardListId2")
+    if (!newKeys) {
+        throw Error("New key should be added")
+    }
+    expect(keys.length).toBe(3)
+    expect(endState[newKeys]).toEqual([])
 })

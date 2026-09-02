@@ -11,7 +11,7 @@ export const boardListReducer = (state: BoardListType[] = initialState, action: 
         }
 
         case 'add_boardList': {
-            const newBoardList: BoardListType = {id: v1(), title: action.payload.title, filter: "All"}
+            const newBoardList: BoardListType = {id: action.payload.id, title: action.payload.title, filter: "All"}
             return [...state, newBoardList]
         }
 
@@ -38,7 +38,7 @@ export const deleteBoardListAC = (boardListId: string) => {
 export const addBoardListAC = (title: string) => {
     return {
         type: 'add_boardList',
-        payload: {title}
+        payload: {title, id: v1()}
     } as const
 }
 
