@@ -1,9 +1,6 @@
 import type {BoardListType, FilterProps} from "../features/boards/board/Board.tsx";
 import {v1} from "uuid";
 
-const initialState: BoardListType[] = []
-
-
 export const boardListReducer = (state: BoardListType[], action: Actions): BoardListType[] => {
     switch (action.type) {
         case 'delete_boardList': {
