@@ -10,6 +10,13 @@ import {
     deleteBoardListAC,
     updateBoardListTitleAC
 } from "../../../model/boardList-reducer.ts";
+import {
+    addTaskAC,
+    changeTaskStatusAC,
+    deleleTaskAC,
+    taskReducer,
+    updateTaskTitleAC
+} from "../../../model/task-reduser.ts";
 
 
 export type FilterProps = "All" | "Active" | "Completed";
@@ -40,9 +47,7 @@ export const Board = () => {
         {id: boardListsId1, title: "First sprint", filter: "All"},
         {id: boardListsId2, title: "Second sprint", filter: "All"},
     ])
-
-
-    const [tasks, setTasks] = useState<TaskStateType>({
+    const [tasks, dispatchTasks] = useReducer(taskReducer, {
             [boardListsId1]: [
                 {id: v1(), title: "Props/Types", isDone: true},
                 {id: v1(), title: "CRUD Functions for task", isDone: true},
@@ -75,51 +80,51 @@ export const Board = () => {
     )
 
     // CRUD for boardList ---------
-    // filter tasks group
-    const changeFilter = (boardListId: string, filter: FilterProps) => {
-        dispatchBoardLists(changeFilterAC(boardListId, filter))
-    }
-    // delete boardList with into tasks, not mutation
-    const deleteBoardList = (boardListId: string) => {
-        dispatchBoardLists(deleteBoardListAC(boardListId))
-        const updatedTask = {...tasks}
-        delete updatedTask[boardListId]
-        setTasks(updatedTask)
-    }
     // create new boardList
     const addBoardList = (newTitle: string) => {
+        // переменная, чтобы вызвать addBoardListAC 1 раз, критично в случае создания так как генерируется id через v1()
         const action = addBoardListAC(newTitle)
         dispatchBoardLists(action)
-        setTasks({...tasks, [action.payload.id]: []})
+        dispatchTasks(action)
     }
+
+    // delete boardList with into tasks, not mutation
+    const deleteBoardList = (boardListId: string) => {
+        const action = deleteBoardListAC(boardListId)
+        dispatchBoardLists(action)
+        dispatchTasks(action)
+    }
+
     // update boardList title
     const updateBoardListTitle = (boardListId: string, newTitle: string) => {
         dispatchBoardLists(updateBoardListTitleAC(boardListId, newTitle))
     }
+
+    // filter tasks group
+    const changeFilter = (boardListId: string, filter: FilterProps) => {
+        dispatchBoardLists(changeFilterAC(boardListId, filter))
+    }
     // CRUD for boardList ---------
 
     // CRUD for tasks ---------
-    //change task status
-    const changeTaskStatus = (boardListId: string, taskId: string, isDone: boolean) => {
-        // setTasks(tasks.map(task => task.id === taskId ? {...task, isDone} : task))
-        setTasks({
-            ...tasks,
-            [boardListId]: tasks[boardListId].map(task => task.id === taskId ? {...task, isDone} : task)
-        });
-    }
-    // delete task
-    const deleteTask = (boardListId: string, taskId: string) => {
-        // setTasks(tasks.filter((task) => task.id !== taskId))
-        setTasks({...tasks, [boardListId]: tasks[boardListId].filter((task) => task.id !== taskId)})
-    }
     // create new task
     const addTask = (boardListId: string, newTitle: string) => {
-        const newTask = {id: v1(), title: newTitle, isDone: false}
-        setTasks({...tasks, [boardListId]: [...tasks[boardListId], newTask]})
+        dispatchTasks(addTaskAC(boardListId, newTitle))
     }
+
+    // delete task
+    const deleteTask = (boardListId: string, taskId: string) => {
+        dispatchTasks(deleleTaskAC(boardListId, taskId))
+    }
+
     // update task title
     const updateTaskTitle = (boardListId: string, taskId: string, newTitle: string) => {
-        setTasks({...tasks, [boardListId]: tasks[boardListId].map(task => task.id === taskId ? {...task, title: newTitle} : task)})
+        dispatchTasks(updateTaskTitleAC(boardListId, taskId, newTitle))
+    }
+
+    //change task status
+    const changeTaskStatus = (boardListId: string, taskId: string, isDone: boolean) => {
+        dispatchTasks(changeTaskStatusAC(boardListId, taskId, isDone))
     }
     // CRUD for tasks ---------
 

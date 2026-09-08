@@ -9,6 +9,12 @@ import {
     updateBoardListTitleAC
 } from "./boardList-reducer.ts";
 
+// toBe — сравнивает точное значение или ссылку на объект/массив.
+// toEqual — сравнивает содержимое массивов или объектов.
+// toBeDefined — проверяет, что значение не равно undefined.
+// toBeUndefined — проверяет, что значение равно undefined.
+// toHaveLength — проверяет длину массива или строки.
+
 let boardListsId1: string;
 let boardListsId2: string;
 let startState: BoardListType[]
@@ -23,8 +29,6 @@ beforeEach(() => {
     ]
 
 })
-
-
 
 test('correct boardLists should be deleted', () => {
     const endState = boardListReducer(startState, deleteBoardListAC(boardListsId1));
