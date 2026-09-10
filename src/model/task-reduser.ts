@@ -2,9 +2,8 @@ import type {TaskStateType} from "../features/boards/board/Board.tsx";
 import type {AddBoardListAction, DeleteBoardListAction} from "./boardList-reducer.ts";
 import {v1} from "uuid";
 
-const taskState: TaskStateType = {}
 
-export const taskReducer = (state: TaskStateType = taskState, action: Action) => {
+export const taskReducer = (state: TaskStateType, action: Action) => {
     switch (action.type) {
         // board list
         case 'ADD_BOARD_LIST': {
@@ -41,7 +40,7 @@ export const taskReducer = (state: TaskStateType = taskState, action: Action) =>
         }
 
         default: {
-            return state
+            return state;
         }
     }
 }

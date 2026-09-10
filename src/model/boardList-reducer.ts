@@ -1,6 +1,7 @@
 import type {BoardListType, FilterProps} from "../features/boards/board/Board.tsx";
 import {v1} from "uuid";
 
+
 export const boardListReducer = (state: BoardListType[], action: Actions): BoardListType[] => {
     switch (action.type) {
         case 'ADD_BOARD_LIST': {
@@ -13,15 +14,24 @@ export const boardListReducer = (state: BoardListType[], action: Actions): Board
         }
 
         case 'UPDATE_BOARD_LIST_TITLE': {
-            return state.map(boardList => boardList.id === action.payload.boardListId ? {...boardList, title: action.payload.title} : boardList)
+            return state.map(boardList => boardList.id === action.payload.boardListId ? {
+                ...boardList,
+                title: action.payload.title
+            } : boardList)
         }
 
         case 'CHANGE_BOARD_LIST_FILTER': {
-            return state.map(boardList => boardList.id === action.payload.boardListId ? {...boardList, filter: action.payload.filter} : boardList)
+            return state.map(boardList => boardList.id === action.payload.boardListId ? {
+                ...boardList,
+                filter: action.payload.filter
+            } : boardList)
         }
 
-        default:
-            return state
+        default: {
+            return state;
+        }
+
+
     }
 }
 
@@ -49,7 +59,7 @@ export const updateBoardListTitleAC = (boardListId: string, title: string) => {
 export const changeFilterAC = (boardListId: string, filter: FilterProps) => {
     return {
         type: 'CHANGE_BOARD_LIST_FILTER',
-        payload: { boardListId, filter }
+        payload: {boardListId, filter}
     } as const
 }
 
