@@ -1,6 +1,6 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {boardListReducer} from "./boardList-reducer.ts";
-import {taskReducer} from "./task-reduser.ts";
+import {boardListReducer} from "../model/boardList-reducer.ts";
+import {taskReducer} from "../model/task-reduser.ts";
 
 const rootReducer = combineReducers({
     boardLists: boardListReducer,
@@ -14,7 +14,8 @@ const rootReducer = combineReducers({
 // }
 
 // ! гибкое решение, возвращает все типы rootReducer
-type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export const store = configureStore({
     reducer: rootReducer

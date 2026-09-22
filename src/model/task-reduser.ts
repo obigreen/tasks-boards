@@ -3,7 +3,7 @@ import type {AddBoardListAction, DeleteBoardListAction} from "./boardList-reduce
 import {v1} from "uuid";
 
 
-export const taskReducer = (state: TaskStateType, action: Action) => {
+export const taskReducer = (state: TaskStateType = {}, action: Action) => {
     switch (action.type) {
         // board list
         case 'ADD_BOARD_LIST': {

@@ -2,7 +2,7 @@ import type {BoardListType, FilterProps} from "../features/boards/board/Board.ts
 import {v1} from "uuid";
 
 
-export const boardListReducer = (state: BoardListType[], action: Actions): BoardListType[] => {
+export const boardListReducer = (state: BoardListType[] = [], action: Actions): BoardListType[] => {
     switch (action.type) {
         case 'ADD_BOARD_LIST': {
             const newBoardList: BoardListType = {id: action.payload.id, title: action.payload.title, filter: "All"}
@@ -30,8 +30,6 @@ export const boardListReducer = (state: BoardListType[], action: Actions): Board
         default: {
             return state;
         }
-
-
     }
 }
 
